@@ -1,0 +1,61 @@
+section {
+    padding: 1rem;
+}
+
+div.host-vans-list-container {
+    padding-inline: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.host-van-card {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    background: #fff;
+    padding: 1rem 1.7rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02), 0 8px 24px rgba(16, 24, 40, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.host-van-card>img {
+    max-width: 5rem;
+    border-radius: 0.4rem;
+}
+
+.host-van-info>h3 {
+    margin-bottom: 0;
+    font-size: 1.25rem;
+}
+
+.host-van-info>p {
+    color: #4D4D4D;
+}
+
+.host-van-link-wrapper {
+    color: unset;
+    text-decoration: none;
+}
+
+
+@media screen and (min-width: 750px) {
+
+    div.host-vans-list-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 325px));
+    }
+
+    .host-van-card {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        max-width: 20rem;
+    }
+
+    .host-van-card>img {
+        max-width: 100%;
+    }
+}

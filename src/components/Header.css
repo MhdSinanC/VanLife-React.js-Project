@@ -1,0 +1,53 @@
+/* Header section */
+header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.1rem;
+}
+
+header .site-logo {
+    color: black;
+    font-weight: 900;
+    font-size: 1.5625rem;
+    margin-right: auto;
+    text-transform: uppercase;
+}
+
+header nav {
+    display: flex;
+    gap: 10px;
+    margin-right: 0.2rem;
+}
+
+header a {
+    text-decoration: none;
+    color: #4d4d4d;
+    font-weight: 600;
+    padding: 0.3125rem;
+}
+
+header a:hover {
+    color: #161616;
+    text-decoration: underline;
+}
+
+header a.activeLink {
+    font-weight: 'bold';
+    color: #161616;
+    text-decoration: underline;
+}
+
+
+
+/* responsive */
+@media screen and (min-width: 497px) {
+
+    header .site-logo {
+        font-size: 2.4rem;
+    }
+
+    header a {
+        font-size: 1.1rem;
+    }
+
+}
