@@ -1,0 +1,76 @@
+.host-van-details-container {
+    padding: 2rem;
+}
+
+.back-button {
+    text-decoration: none;
+    margin-bottom: 2rem;
+    display: inline-block;
+    color: #858585;
+}
+
+.back-button>span {
+    margin-left: 0.5rem;
+    color: #201F1D;
+}
+
+.back-button>span:hover {
+    text-decoration: underline;
+}
+
+.host-van-detail {
+    display: flex;
+    background-color: white;
+    border-radius: 6px;
+    padding: 1.2rem;
+}
+
+.host-van-detail>img {
+    max-width: 10rem;
+    object-fit: contain;
+}
+
+.host-van-detail-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 2rem;
+}
+
+.host-van-detail-info>span {
+    color: #FFEAD0;
+    max-width: fit-content;
+    padding: 0.5rem 1.1rem;
+    border-radius: 0.4rem;
+    text-transform: capitalize;
+}
+
+.host-van-detail-info>span.simple {
+    background-color: #E17654;
+}
+
+.host-van-detail-info>span.rugged {
+    background-color: #115E59;
+}
+
+.host-van-detail-info>span.luxury {
+    background-color: #161616;
+}
+
+
+
+.host-van-detail-info>h2 {
+    margin-bottom: 0;
+    font-size: 24px;
+}
+
+.host-van-detail-info>p {
+    font-weight: 700;
+    font-size: 19px;
+    margin-top: 0.6rem;
+}
+
+.host-van-detail-info>p>span {
+    font-weight: 500;
+    font-size: 16px;
+}

@@ -22,6 +22,7 @@ export default function App() {
           <Route path='about' element={<About />} />
           <Route path='vans' element={<Vans />} />
           <Route path='vans/:id' element={<VanDetails />} />
+
           <Route path='host' element={<HostLayout />}>
             <Route index element={<Dashboard />} />
             <Route path='income' element={<Income />} />
@@ -29,6 +30,7 @@ export default function App() {
             <Route path='vans/:id' element={<HostVanDetail />} />
             <Route path='reviews' element={<Reviews />} />
           </Route>
+
         </Route>
       </Routes>
     </BrowserRouter>

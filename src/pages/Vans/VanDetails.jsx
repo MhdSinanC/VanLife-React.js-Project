@@ -15,11 +15,13 @@ export default function VanDetails() {
 
             try {
                 const res = await fetch(`/api/vans/${id}`);
-                const data = await res.json();
-                setVan(data.vans);
+
                 if (!res.ok) {
                     throw new Error('Failed to fetch Van');
                 }
+                
+                const data = await res.json();
+                setVan(data.vans);
 
             } catch (e) {
                 setError(e.message || 'Something went wrong!');

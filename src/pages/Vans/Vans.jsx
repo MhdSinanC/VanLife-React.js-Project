@@ -35,17 +35,16 @@ export default function Vans() {
     }, [])
 
     const vansElement = vans.map(van => (
-        <div key={van.id} className="van-card">
-            <Link to={`/vans/${van.id}`} className="link-reset">
+        <Link key={van.id} to={`/vans/${van.id}`} className="link-reset">
+            <div className="van-card">
                 <img src={van.imageUrl} alt={van.name} />
                 <div className="van-info">
                     <h3>{van.name}</h3>
                     <p><b>${van.price}</b><span>/day</span></p>
                 </div>
                 <i className={`van-type ${van.type}`}>{van.type[0].toUpperCase() + van.type.slice(1)}</i>
-            </Link>
-
-        </div>
+            </div>
+        </Link>
     ))
 
 
