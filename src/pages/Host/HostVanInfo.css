@@ -1,0 +1,9 @@
+.host-van-nested-info {
+    max-width: 450px;
+    font-size: 15px;
+    line-height: 21px;
+}
+
+.host-van-nested-info>h4>span {
+    font-weight: 500;
+}

@@ -1,0 +1,11 @@
+.host-van-nested-price {
+    font-weight: 500;
+    font-size: 24px;
+    color: #161616;
+    margin-top: 2rem;
+}
+
+.host-van-nested-price>span {
+    font-size: 16px;
+    color: #4D4D4D;
+}

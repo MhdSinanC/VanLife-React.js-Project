@@ -1,5 +1,6 @@
 .host-van-details-container {
     padding: 2rem;
+    max-width: max-content
 }
 
 .back-button {
@@ -18,11 +19,14 @@
     text-decoration: underline;
 }
 
+.host-van-details-wrapper {
+    background-color: white;
+    padding: 1.56rem;
+    border-radius: 6px;
+}
+
 .host-van-detail {
     display: flex;
-    background-color: white;
-    border-radius: 6px;
-    padding: 1.2rem;
 }
 
 .host-van-detail>img {
@@ -34,7 +38,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-left: 2rem;
+    padding-left: 1rem;
 }
 
 .host-van-detail-info>span {
@@ -73,4 +77,23 @@
 .host-van-detail-info>p>span {
     font-weight: 500;
     font-size: 16px;
+}
+
+
+.host-van-detail-nav {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.host-van-detail-nav>a {
+    text-decoration: none;
+    color: #4D4D4D;
+    font-size: 16px;
+}
+
+.host-van-detail-nav>a:hover {
+    text-decoration: underline;
+    color: #161616;
+    font-weight: bold;
 }
