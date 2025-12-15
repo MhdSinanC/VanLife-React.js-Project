@@ -2,6 +2,43 @@
     padding-inline: 2rem;
 }
 
+.van-list-filter-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-block: 2rem;
+}
+
+.van-list-filter-buttons .van-type {
+    background-color: #FFEAD0;
+    color: #4D4D4D;
+    padding: 7px 26px;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 0.31rem;
+}
+
+.van-list-filter-buttons .van-type.clear-filters {
+    background-color: inherit;
+    text-decoration: underline;
+}
+
+.van-list-filter-buttons .van-type.simple:hover {
+    background-color: #E17654;
+    color: #FFEAD0;
+}
+
+.van-list-filter-buttons .van-type.rugged:hover {
+    background-color: #115E59;
+    color: #FFEAD0;
+}
+
+.van-list-filter-buttons .van-type.luxury:hover {
+    background-color: #161616;
+    color: #FFEAD0;
+}
+
+
+
 .van-loading, .van-error {
     text-align: center;
     margin-top: 3rem;

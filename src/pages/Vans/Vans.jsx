@@ -1,6 +1,6 @@
 import React from "react"
 import './Vans.css'
-import { Link } from "react-router-dom";
+import { Link, useSearchParams, NavLink } from "react-router-dom";
 
 
 export default function Vans() {
@@ -8,6 +8,10 @@ export default function Vans() {
     const [vans, setVans] = React.useState([]);
     const [error, setError] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
+
+    const [searchParams] = useSearchParams();
+    const typeFilter = searchParams.get('type');
+    const filteredVans = typeFilter ? vans.filter(van => van.type === typeFilter) : vans;
 
     React.useEffect(() => {
         const fetchData = async () => {
@@ -34,7 +38,7 @@ export default function Vans() {
 
     }, [])
 
-    const vansElement = vans.map(van => (
+    const vansElement = filteredVans.map(van => (
         <Link key={van.id} to={`/vans/${van.id}`} className="link-reset">
             <div className="van-card">
                 <img src={van.imageUrl} alt={van.name} />
@@ -52,6 +56,13 @@ export default function Vans() {
         <>
             <div className="van-list-container">
                 <h1>Explore our van options</h1>
+
+                <div className="van-list-filter-buttons">
+                    <Link to={'?type=simple'} className="van-type simple" >Simple</Link>
+                    <Link to={'?type=rugged'} className="van-type rugged" >Rugged</Link>
+                    <Link to={'?type=luxury'} className="van-type luxury" >Luxury</Link>
+                    <Link to={'.'} className="van-type clear-filters" >Clear filter</Link>
+                </div>
 
                 {loading && <h2 className="van-loading">Loading vans...</h2>}
                 {error && <h2 className="van-error">{error}</h2>}
