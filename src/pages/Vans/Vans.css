@@ -15,6 +15,7 @@
     font-size: 16px;
     text-decoration: none;
     border-radius: 0.31rem;
+    border: 1px solid black;
 }
 
 .van-list-filter-buttons .van-type.clear-filters {
@@ -22,17 +23,35 @@
     text-decoration: underline;
 }
 
+
 .van-list-filter-buttons .van-type.simple:hover {
     background-color: #E17654;
     color: #FFEAD0;
 }
+
+.van-list-filter-buttons .van-type.simple.selected {
+    background-color: #E17654;
+    color: #FFEAD0;
+}
+
 
 .van-list-filter-buttons .van-type.rugged:hover {
     background-color: #115E59;
     color: #FFEAD0;
 }
 
+.van-list-filter-buttons .van-type.rugged.selected {
+    background-color: #115E59;
+    color: #FFEAD0;
+}
+
+
 .van-list-filter-buttons .van-type.luxury:hover {
+    background-color: #161616;
+    color: #FFEAD0;
+}
+
+.van-list-filter-buttons .van-type.luxury.selected {
     background-color: #161616;
     color: #FFEAD0;
 }
