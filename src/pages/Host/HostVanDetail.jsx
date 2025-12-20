@@ -47,7 +47,9 @@ export default function HostVanDetail() {
                 {error && <h2>{error}</h2>}
                 {currentVan && (
                     <>
-                        <Link to={'..'} relative="path" className="back-button">&larr;<span>Back to all vans</span></Link>
+                        <Link to={'..'} relative="path" className="back-button">
+                            &larr;<span>Back to all vans</span>
+                        </Link>
                         <div className="host-van-details-wrapper">
                             <div className="host-van-detail">
                                 <img src={currentVan.imageUrl} alt={currentVan.name} />

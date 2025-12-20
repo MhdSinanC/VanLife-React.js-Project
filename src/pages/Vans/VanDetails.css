@@ -1,3 +1,11 @@
+.van-detail-wrapper {
+    padding-inline: 1rem;
+}
+
+.van-detail-wrapper>.back-button {
+    margin-block: 1rem;
+}
+
 .van-detail-container {
     padding: 1rem;
 }
@@ -58,7 +66,13 @@
 }
 
 
-@media  screen and (min-width: 700px) {
+@media screen and (min-width: 700px) {
+
+    .van-detail-wrapper {
+        padding-inline: 4rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 
     .van-detail-container {
         display: flex;
