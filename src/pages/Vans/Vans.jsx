@@ -93,8 +93,8 @@ export default function Vans() {
                         </button> : null}
                 </div>
 
-                {loading && <h2 className="van-loading">Loading vans...</h2>}
-                {error && <h2 className="van-error">{error}</h2>}
+                {loading && <h2 className="van-loading" aria-live="polite">Loading vans...</h2>}
+                {error && <h2 className="van-error" aria-live="assertive">{error}</h2>}
 
                 {!loading && !error && (
                     <div className="van-list">

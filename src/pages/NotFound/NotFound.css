@@ -1,0 +1,25 @@
+.not-found {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding-inline: 2rem;
+    margin-top: 2rem;
+    align-items: center;
+}
+
+.not-found>h1 {
+    line-height: 42px;
+}
+
+.not-found>a {
+    background-color: #161616;
+    color: white;
+    margin-top: 1rem;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 1rem;
+    border-radius: 0.32rem;
+    width: 100%;
+    max-width: 31rem;
+}

@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import './Header.css';
+import { CgProfile } from "react-icons/cg";
 
 export default function Header() {
     return (
@@ -12,7 +13,6 @@ export default function Header() {
                     Host
                 </NavLink>
 
-
                 <NavLink
                     to='/about'
                     className={({ isActive }) => isActive ? "activeLink" : ""}>
@@ -23,6 +23,11 @@ export default function Header() {
                     to='/vans'
                     className={({ isActive }) => isActive ? "activeLink" : ""}>
                     Vans
+                </NavLink>
+
+                <NavLink
+                    to='/login'>
+                    <CgProfile className="login-icon"/>
                 </NavLink>
             </nav>
         </header>
