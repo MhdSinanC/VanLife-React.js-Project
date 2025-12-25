@@ -1,6 +1,7 @@
 import React from "react";
 import './Vans.css';
 import { Link, useSearchParams } from "react-router-dom";
+import { getVans } from "../../../api";
 
 
 export default function Vans() {
@@ -26,17 +27,11 @@ export default function Vans() {
     }
 
     React.useEffect(() => {
-        const fetchData = async () => {
+        const loadVans = async () => {
 
             try {
-                const res = await fetch('/api/vans');
-
-                if (!res.ok) {
-                    throw new Error('Failed to fetch Vans!');
-                }
-
-                const vansData = await res.json();
-                setVans(vansData.vans || []);
+                const data = await getVans();
+                setVans(data || []);
 
             } catch (e) {
                 setError(e.message || 'Something went Wrong');
@@ -46,9 +41,10 @@ export default function Vans() {
             }
 
         }
-        fetchData();
+        loadVans();
 
     }, [])
+
 
     const vansElement = filteredVans.map(van => (
         <Link key={van.id} to={van.id} state={{search: searchParams.toString(), type: typeFilter}} className="link-reset">

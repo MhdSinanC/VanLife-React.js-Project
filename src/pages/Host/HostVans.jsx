@@ -1,6 +1,7 @@
 import React from 'react';
 import './HostVans.css';
 import { Link } from 'react-router-dom';
+import { getHostVans } from '../../../api';
 
 export default function HostVans() {
 
@@ -9,16 +10,10 @@ export default function HostVans() {
     const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
-        const fetchData = async () => {
+        const loadVans = async () => {
             try {
-                const res = await fetch('/api/host/vans');
-
-                if (!res.ok) {
-                    throw new Error('Failed to fetch host vans');
-                }
-
-                const data = await res.json();
-                setVans(data.vans || []);
+                const data = await getHostVans();
+                setVans(data || []);
 
             } catch (e) {
                 setError(e.message || 'Something went wrong!');
@@ -27,7 +22,7 @@ export default function HostVans() {
                 setLoading(false);
             }
         }
-        fetchData();
+        loadVans();
     }, [])
 
 

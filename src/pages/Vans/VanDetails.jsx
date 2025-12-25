@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
 import './VanDetails.css';
+import { getVans } from '../../../api';
 
 export default function VanDetails() {
 
@@ -14,17 +15,11 @@ export default function VanDetails() {
     const { id } = useParams();
 
     React.useEffect(() => {
-        const fetchData = async () => {
+        const loadVans = async () => {
 
             try {
-                const res = await fetch(`/api/vans/${id}`);
-
-                if (!res.ok) {
-                    throw new Error('Failed to fetch Van');
-                }
-
-                const data = await res.json();
-                setVan(data.vans);
+                const data = await getVans(id);     
+                setVan(data);
 
             } catch (e) {
                 setError(e.message || 'Something went wrong!');
@@ -34,7 +29,7 @@ export default function VanDetails() {
             }
 
         }
-        fetchData();
+        loadVans();
     }, [id])
 
     return (
