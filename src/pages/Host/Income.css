@@ -1,0 +1,67 @@
+.host-income>h1 {
+    font-size: 36px;
+}
+
+.host-income>p {
+    color: #4D4D4D;
+}
+
+.host-income>p>span {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.host-income>h2 {
+    font-size: 48px;
+    font-weight: 800;
+}
+
+.host-income>.graph {
+    width: 100%;
+    max-width: 500px;
+}
+
+.income-info-header {
+    max-width: 500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.income-info-header>h3 {
+    font-size: 24px;
+}
+
+.income-info-header>p {
+    color: #4D4D4D;
+}
+
+.income-info-header>p>span {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.transactions {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.7rem;
+}
+
+.transaction {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 35px;
+    background-color: white;
+}
+
+.transaction>h3 {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.transaction>p {
+    color: #4D4D4D;
+    font-size: 20px;
+}

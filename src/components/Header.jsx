@@ -3,6 +3,11 @@ import './Header.css';
 import { CgProfile } from "react-icons/cg";
 
 export default function Header() {
+
+    const fakeLogOut = () => {
+        localStorage.removeItem('isLogged')
+    }
+
     return (
         <header>
             <Link className='site-logo' to='/'>#Vanlife</Link>
@@ -29,6 +34,8 @@ export default function Header() {
                     to='/login'>
                     <CgProfile className="login-icon"/>
                 </NavLink>
+
+                <button onClick={fakeLogOut}>logout</button>
             </nav>
         </header>
     )

@@ -1,5 +1,39 @@
+import IncGraph from '../../assets/images/Group-312.png';
+import './Income.css';
+
+
 export default function Income() {
+
+    const transactionsData = [
+        { amount: 720, date: "01/03/2023", id: "1" },
+        { amount: 560, date: "12/12/2022", id: "2" },
+        { amount: 980, date: "03/12/2022", id: "3" },
+    ]
+
     return (
-        <h1>Income goes here...</h1>
+        <section className="host-income">
+            <h1>Income</h1>
+            <p>Last <span>30 days</span></p>
+            <h2>$2,890</h2>
+
+            <img src={IncGraph} alt="Income graph" className="graph" />
+
+
+            <div className="income-info-header">
+                <h3>Your transactions ({transactionsData.length})</h3>
+                <p>
+                    Last <span>30 days</span>
+                </p>
+            </div>
+
+            <div className="transactions">
+                {transactionsData.map(item => (
+                    <div key={item.id} className="transaction">
+                        <h3>${item.amount}</h3>
+                        <p>{item.date}</p>
+                    </div>
+                ))}
+            </div>
+        </section>
     )
 }

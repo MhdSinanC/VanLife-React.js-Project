@@ -1,0 +1,79 @@
+.host-dashboard-earnings {
+    background-color: #FFEAD0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.host-dashboard-earnings>.earnings-info>h1 {
+    font-size: 36px;
+}
+
+.host-dashboard-earnings>.earnings-info>p {
+    color: #4D4D4D;
+}
+
+.host-dashboard-earnings>.earnings-info>p>span {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.host-dashboard-earnings>.earnings-info>h2 {
+    font-size: 48px;
+    font-weight: 800;
+}
+
+.dashboard-link-button {
+    text-decoration: none;
+    color: #161616;
+    cursor: pointer;
+}
+
+
+.host-dashboard-reviews {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.reviews-info {
+    display: flex;
+    align-items: center;
+}
+
+.reviews-info>h2 {
+    color: #161616;
+    margin-right: 15px;
+}
+
+.reviews-info>.star {
+    color: #FF8C38;
+    font-size: 22px;
+    margin-right: 5px;
+}
+
+.reviews-info>p {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.reviews-info>p>span {
+    font-weight: 700;
+}
+
+
+
+
+.host-dashboard-vans>.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 1rem;
+}
+
+@media screen and (max-width: 750px) {
+    .ml-auto {
+        margin-left: auto;
+    }
+}
