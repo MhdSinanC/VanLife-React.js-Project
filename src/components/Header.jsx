@@ -4,9 +4,9 @@ import { CgProfile } from "react-icons/cg";
 
 export default function Header() {
 
-    const fakeLogOut = () => {
-        localStorage.removeItem('isLogged')
-    }
+    // const fakeLogOut = () => {
+    //     localStorage.removeItem('isLogged')
+    // }
 
     return (
         <header>
@@ -35,7 +35,7 @@ export default function Header() {
                     <CgProfile className="login-icon"/>
                 </NavLink>
 
-                <button onClick={fakeLogOut}>logout</button>
+                {/* <button onClick={fakeLogOut}>logout</button> */}
             </nav>
         </header>
     )

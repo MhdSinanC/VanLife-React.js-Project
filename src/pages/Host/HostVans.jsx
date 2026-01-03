@@ -51,7 +51,7 @@ export default function HostVans() {
                 {error && <h2 className='van-error'>{error}</h2>}
 
                 {!loading && !error && (
-                    vans.length > 0 ? hostVansElements : <h3>NO Hosted Vans</h3>)
+                    vans.length > 0 ? hostVansElements : <h3>No Hosted Vans</h3>)
                 }
             </div>
         </section>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
 import './VanDetails.css';
-import { getVans } from '../../../api';
+import { getVan } from '../../../api';
 
 export default function VanDetails() {
 
@@ -18,7 +18,7 @@ export default function VanDetails() {
         const loadVans = async () => {
 
             try {
-                const data = await getVans(id);     
+                const data = await getVan(id);     
                 setVan(data);
 
             } catch (e) {

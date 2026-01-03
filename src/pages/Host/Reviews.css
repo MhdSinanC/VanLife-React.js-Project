@@ -1,0 +1,47 @@
+section.host-reviews {
+    max-width: 500px;
+}
+
+.host-reviews>.top-text {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.host-reviews>.top-text>h2 {
+    font-size: 32px;
+}
+
+.host-reviews>.top-text>p {
+    color: #4D4D4D;
+    margin-top: 20px;
+}
+
+.host-reviews>.top-text>p>span {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.host-reviews>.graph {
+    width: 100%;
+}
+
+.review-info {
+    display: flex;
+    gap: 5px;
+    font-weight: 600;
+}
+
+.review-info>.name {
+    color: #161616;
+    margin-top: 10px;
+}
+
+.review-info>.date {
+    color: #8C8C8C;
+    margin-top: 10px;
+}
+
+.review-text {
+    margin-top: 0;
+}
