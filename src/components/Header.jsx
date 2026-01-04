@@ -2,11 +2,8 @@ import { Link, NavLink } from "react-router-dom";
 import './Header.css';
 import { CgProfile } from "react-icons/cg";
 
-export default function Header() {
+export default function Header({ isLogged, onLogOut }) {
 
-    // const fakeLogOut = () => {
-    //     localStorage.removeItem('isLogged')
-    // }
 
     return (
         <header>
@@ -30,12 +27,16 @@ export default function Header() {
                     Vans
                 </NavLink>
 
-                <NavLink
-                    to='/login'>
-                    <CgProfile className="login-icon"/>
-                </NavLink>
 
-                {/* <button onClick={fakeLogOut}>logout</button> */}
+
+                {
+                    isLogged ?
+                        <button onClick={onLogOut}>Logout</button>
+                        : <NavLink
+                            to='/login'>
+                            <CgProfile className="login-icon" />
+                        </NavLink>
+                }
             </nav>
         </header>
     )

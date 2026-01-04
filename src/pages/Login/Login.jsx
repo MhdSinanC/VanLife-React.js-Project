@@ -1,15 +1,22 @@
 import React from 'react';
 import './Login.css';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import { loginUser } from '../../../api';
 
 export default function Login() {
 
+    const STATUS = {
+        IDLE: 'idle',
+        SUBMITTING: 'submitting'
+    }
+
+    const {setIsLogged} = useOutletContext();
+
     const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" })
-    const [status, setStatus] = React.useState('idle');
+    const [status, setStatus] = React.useState(STATUS.IDLE);
     const [error, setError] = React.useState(null);
 
-    const isDisabled = status === 'submitting' || !loginFormData.email.trim() || !loginFormData.password.trim() ;
+    const isDisabled = status === STATUS.SUBMITTING || !loginFormData.email.trim() || !loginFormData.password.trim() ;
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -17,21 +24,23 @@ export default function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setStatus('submitting');
+        setStatus(STATUS.SUBMITTING);
         setError(null);
 
         try {
+            //Authentication is mocked for learning purposes :)
             const data = await loginUser(loginFormData);
             console.log(data);
 
             localStorage.setItem('isLogged', 'true')
             localStorage.setItem('token', data.token)
-            setStatus('idle');
+            setIsLogged(true)
+            setStatus(STATUS.IDLE);
             navigate(location.state?.from || '/host', {replace: true});
 
         } catch (e) {
             setError(e.message);
-            setStatus('idle');
+            setStatus(STATUS.IDLE);
         }
     }
 

@@ -46,7 +46,7 @@ export default function Vans() {
     }, [])
 
 
-    const vansElement = filteredVans.map(van => (
+    const vansCards = filteredVans.map(van => (
         <Link key={van.id} to={van.id} state={{search: searchParams.toString(), type: typeFilter}} className="link-reset">
             <div className="van-card">
                 <img src={van.imageUrl} alt={van.name} />
@@ -94,7 +94,7 @@ export default function Vans() {
 
                 {!loading && !error && (
                     <div className="van-list">
-                        {vansElement}
+                        {vansCards}
                     </div>
                 )}
             </div>
