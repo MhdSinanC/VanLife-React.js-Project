@@ -1,10 +1,11 @@
-import { Navigate, Outlet, useLocation, useOutletContext } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
 
 export default function AuthRequired() {
     const location = useLocation();
-    const {isLogged} = useOutletContext();
+    const {token} = useAuth();
 
-    if (!isLogged) {
+    if (!token) {
         return <Navigate to='/login' state={{message: 'You need to login first!', from: location.pathname}} replace/>
     }
 

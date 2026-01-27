@@ -1,7 +1,9 @@
 import React from 'react';
 import './HostVans.css';
 import { Link } from 'react-router-dom';
-import { getHostVans } from '../../../api';
+import { apiFetch } from '../../../HelperFunctions/apiFetch';
+import { useAuth } from '../../../Context/AuthContext';
+
 
 
 export default function HostVans() {
@@ -10,10 +12,13 @@ export default function HostVans() {
     const [error, setError] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
 
+    const {token} = useAuth()
+
     React.useEffect(() => {
         const loadVans = async () => {
             try {
-                const data = await getHostVans();
+                const res = await apiFetch('/api/host/vans', token)
+                const data = await res.json()
                 setVans(data || []);
 
             } catch (e) {

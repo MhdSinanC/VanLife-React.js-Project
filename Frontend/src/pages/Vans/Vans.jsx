@@ -1,7 +1,6 @@
 import React from "react";
 import './Vans.css';
 import { Link, useSearchParams } from "react-router-dom";
-import { getVans } from "../../../api";
 
 
 export default function Vans() {
@@ -30,7 +29,8 @@ export default function Vans() {
         const loadVans = async () => {
 
             try {
-                const data = await getVans();
+                const res = await fetch('/api/vans');
+                const data = await res.json()                
                 setVans(data || []);
 
             } catch (e) {

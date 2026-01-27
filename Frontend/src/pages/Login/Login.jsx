@@ -1,7 +1,8 @@
 import React from 'react';
 import './Login.css';
-import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
-import { loginUser } from '../../../api';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../Context/AuthContext';
+
 
 export default function Login() {
 
@@ -9,8 +10,7 @@ export default function Login() {
         IDLE: 'idle',
         SUBMITTING: 'submitting'
     }
-
-    const {setIsLogged} = useOutletContext();
+    
 
     const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" })
     const [status, setStatus] = React.useState(STATUS.IDLE);
@@ -20,6 +20,7 @@ export default function Login() {
 
     const location = useLocation();
     const navigate = useNavigate();
+    const {setToken} = useAuth();
 
 
     const handleSubmit = async (e) => {
@@ -29,12 +30,21 @@ export default function Login() {
 
         try {
             //Authentication is mocked for learning purposes :)
-            const data = await loginUser(loginFormData);
-            console.log(data);
+            const res = await fetch('/api/login', {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(loginFormData)
+            })
 
-            localStorage.setItem('isLogged', 'true')
-            localStorage.setItem('token', data.token)
-            setIsLogged(true)
+            if(!res.ok) {
+                throw new Error('Login failed')
+            }
+
+            const data = await res.json()
+
+            setToken(data.token)
             setStatus(STATUS.IDLE);
             navigate(location.state?.from || '/host', {replace: true});
 

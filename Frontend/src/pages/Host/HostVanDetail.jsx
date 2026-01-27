@@ -1,7 +1,8 @@
 import React from "react";
 import { useParams, Link, Outlet, NavLink } from "react-router-dom";
 import './HostVanDetail.css';
-import { getVan } from "../../../api";
+import { apiFetch } from "../../../HelperFunctions/apiFetch";
+import { useAuth } from "../../../Context/AuthContext";
 
 export default function HostVanDetail() {
 
@@ -10,18 +11,20 @@ export default function HostVanDetail() {
     const [error, setError] = React.useState(null);
 
     const { id } = useParams();
+    const {token} = useAuth();
 
-    const activeStyles = {
-        textDecoration: 'underline',
-        color: '#161616',
-        fontWeight: 'bold'
-    }
+    // const activeStyles = {
+    //     textDecoration: 'underline',
+    //     color: '#161616',
+    //     fontWeight: 'bold'
+    // }
 
     React.useEffect(() => {
         const loadVans = async () => {
 
             try {
-                const data = await getVan(id);
+                const res = await apiFetch(`/api/host/vans/${id}`, token)
+                const data = await res.json()
                 setCurrentVan(data);
 
             } catch (e) {
@@ -59,17 +62,17 @@ export default function HostVanDetail() {
                             <nav className="host-van-detail-nav">
                                 <NavLink to={'.'}
                                     end
-                                    style={({ isActive }) => isActive ? activeStyles : null}>
+                                    className={(isActive) => isActive ? 'active' : ''}>
                                     Details
                                 </NavLink>
 
                                 <NavLink to={'pricing'}
-                                    style={({ isActive }) => isActive ? activeStyles : null}>
+                                    className={(isActive) => isActive ? 'active' : ''}>
                                     Pricing
                                 </NavLink>
 
                                 <NavLink to={'photos'}
-                                    style={({ isActive }) => isActive ? activeStyles : null}>
+                                    className={(isActive) => isActive ? 'active' : ''}>
                                     Photos
                                 </NavLink>
                             </nav>

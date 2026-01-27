@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
 import './VanDetails.css';
-import { getVan } from '../../../api';
 
 export default function VanDetails() {
 
@@ -10,7 +9,6 @@ export default function VanDetails() {
     const [van, setVan] = React.useState(null);
 
     const location = useLocation();
-    console.log(location)
 
     const { id } = useParams();
 
@@ -18,7 +16,9 @@ export default function VanDetails() {
         const loadVans = async () => {
 
             try {
-                const data = await getVan(id);     
+                
+                const res = await fetch(`/api/vans/${id}`)     
+                const data = await res.json()
                 setVan(data);
 
             } catch (e) {

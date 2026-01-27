@@ -37,7 +37,16 @@ header a.activeLink {
     text-decoration: underline;
 }
 
-header a>.login-icon {
+.login-icon {
+    font-size: 1.5rem;
+}
+
+header button {
+    border: none;
+    background-color: #FFF7ED;
+}
+
+.logout-icon {
     font-size: 1.5rem;
 }
 

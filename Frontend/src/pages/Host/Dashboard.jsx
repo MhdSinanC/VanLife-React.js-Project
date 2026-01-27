@@ -1,8 +1,9 @@
 import React from "react";
 import { BsStarFill } from "react-icons/bs"
 import { Link } from "react-router-dom"
-import { getHostVans } from "../../../api"
 import './Dashboard.css'
+import { apiFetch } from "../../../HelperFunctions/apiFetch";
+import { useAuth } from "../../../Context/AuthContext";
 
 export default function Dashboard() {
 
@@ -10,11 +11,14 @@ export default function Dashboard() {
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState(null);
 
+    const {token} = useAuth();
+
     React.useEffect(() => {
         const loadVans = async () => {
             try {
                 setLoading(true)
-                const data = await getHostVans();
+                const res = await apiFetch('/api/host/vans', token)
+                const data = await res.json()
                 setVans(data || []);
 
             } catch (e) {

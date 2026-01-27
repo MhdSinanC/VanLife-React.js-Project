@@ -97,3 +97,10 @@
     color: #161616;
     font-weight: bold;
 }
+
+
+.host-van-detail-nav>a.active {
+    text-decoration: 'underline';
+    color: '#161616';
+    font-weight: bold;
+}
