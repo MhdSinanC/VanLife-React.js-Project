@@ -29,7 +29,6 @@ export default function Login() {
         setError(null);
 
         try {
-            //Authentication is mocked for learning purposes :)
             const res = await fetch('/api/login', {
                 method: 'post',
                 headers: {
@@ -38,11 +37,11 @@ export default function Login() {
                 body: JSON.stringify(loginFormData)
             })
 
-            if(!res.ok) {
-                throw new Error('Login failed')
-            }
-
             const data = await res.json()
+
+            if(!res.ok) {
+                throw new Error(data.message)
+            }
 
             setToken(data.token)
             setStatus(STATUS.IDLE);

@@ -4,6 +4,8 @@ import './HostVanDetail.css';
 import { apiFetch } from "../../../HelperFunctions/apiFetch";
 import { useAuth } from "../../../Context/AuthContext";
 
+
+
 export default function HostVanDetail() {
 
     const [currentVan, setCurrentVan] = React.useState(null);
