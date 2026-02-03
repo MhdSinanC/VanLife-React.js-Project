@@ -1,7 +1,7 @@
-import vansData from '../data.js'
+import Van from '../models/Van.js';
 
-export function getHostVans(req,res) {
-    const hostVans = vansData.filter(data => data.hostId == 123)
-    res.json(hostVans);
+
+export async function getHostVans(req,res) {
+    const hostVans = await Van.find({hostId: 123})
+    res.json(hostVans)
 }
-

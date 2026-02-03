@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, Link, Outlet, NavLink } from "react-router-dom";
 import './HostVanDetail.css';
-import { apiFetch } from "../../../HelperFunctions/apiFetch";
+import { apiFetch } from "../../../utils/apiFetch";
 import { useAuth } from "../../../Context/AuthContext";
 
 
@@ -13,7 +13,7 @@ export default function HostVanDetail() {
     const [error, setError] = React.useState(null);
 
     const { id } = useParams();
-    const {token} = useAuth();
+    const {token, setToken} = useAuth();
 
     // const activeStyles = {
     //     textDecoration: 'underline',
@@ -25,7 +25,7 @@ export default function HostVanDetail() {
         const loadVans = async () => {
 
             try {
-                const res = await apiFetch(`/api/host/vans/${id}`, token)
+                const res = await apiFetch(`/api/host/vans/${id}`, token, setToken)
                 const data = await res.json()
                 setCurrentVan(data);
 

@@ -2,7 +2,7 @@ import React from "react";
 import { BsStarFill } from "react-icons/bs"
 import { Link } from "react-router-dom"
 import './Dashboard.css'
-import { apiFetch } from "../../../HelperFunctions/apiFetch";
+import { apiFetch } from "../../../utils/apiFetch";
 import { useAuth } from "../../../Context/AuthContext";
 
 export default function Dashboard() {
@@ -11,13 +11,13 @@ export default function Dashboard() {
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState(null);
 
-    const {token} = useAuth();
+    const {token, setToken} = useAuth();
 
     React.useEffect(() => {
         const loadVans = async () => {
             try {
                 setLoading(true)
-                const res = await apiFetch('/api/host/vans', token)
+                const res = await apiFetch('/api/host/vans', token, setToken)
                 const data = await res.json()
                 setVans(data || []);
 

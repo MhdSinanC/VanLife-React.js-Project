@@ -1,7 +1,7 @@
 import React from 'react';
 import './HostVans.css';
 import { Link } from 'react-router-dom';
-import { apiFetch } from '../../../HelperFunctions/apiFetch';
+import { apiFetch } from '../../../utils/apiFetch';
 import { useAuth } from '../../../Context/AuthContext';
 
 
@@ -12,12 +12,12 @@ export default function HostVans() {
     const [error, setError] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
 
-    const {token} = useAuth()
+    const {token, setToken} = useAuth()
 
     React.useEffect(() => {
         const loadVans = async () => {
             try {
-                const res = await apiFetch('/api/host/vans', token)
+                const res = await apiFetch('/api/host/vans', token, setToken)
                 const data = await res.json()
                 setVans(data || []);
 
@@ -33,7 +33,7 @@ export default function HostVans() {
 
 
     const hostVansElements = vans.map(van => (
-        <Link key={van.id} to={van.id} className='host-van-link-wrapper'>
+        <Link key={van.id} to={`/host/vans/${van.id}`} className='host-van-link-wrapper'>
 
             <div className="host-van-card">
                 <img src={van.imageUrl} alt={van.name} />

@@ -5,14 +5,28 @@ import { CgProfile } from "react-icons/cg";
 import { IoMdLogOut } from "react-icons/io";
 import { useAuth } from "../../Context/AuthContext";
 
+
 export default function Header() {
 
     const { token, setToken } = useAuth();
 
-    const onLogOut = () => {
-        setToken(null);
+    const onLogOut = async () => {
+
+        try {
+            await fetch('/api/auth/logout', {
+                method: "POST",
+                credentials: 'include'
+            })
+
+        }catch(e) {
+            console.log('Logout request failed', e)
+
+        }finally {
+            setToken(null)
+        }
     }
-    
+
+
     return (
         <header>
             <Link className='site-logo' to='/'>#Vanlife</Link>

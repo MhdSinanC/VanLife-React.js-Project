@@ -30,7 +30,7 @@ export default function Vans() {
 
             try {
                 const res = await fetch('/api/vans');
-                const data = await res.json()                
+                const data = await res.json()
                 setVans(data || []);
 
             } catch (e) {
@@ -47,7 +47,8 @@ export default function Vans() {
 
 
     const vansCards = filteredVans.map(van => (
-        <Link key={van.id} to={van.id} state={{search: searchParams.toString(), type: typeFilter}} className="link-reset">
+
+        <Link key={van.id} to={`/vans/${van.id}`} state={{ search: searchParams.toString(), type: typeFilter }} className="link-reset">
             <div className="van-card">
                 <img src={van.imageUrl} alt={van.name} />
                 <div className="van-info">

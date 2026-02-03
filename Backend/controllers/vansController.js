@@ -1,12 +1,29 @@
-import  vansData from "../data.js"
+import Van from "../models/Van.js";
 
-export function getAllVans(req, res) {
-    return res.json(vansData)
+export async function getAllVans(req, res) {
+
+    try {
+        return res.json(await Van.find())
+    }
+    catch (e) {
+        console.error("Error getting vans data:", e)
+    }
+
 }
 
-export function getVanById(req, res)  {
-    const { id } = req.params;
-    const van = vansData.find(van => van.id === id)
-    return res.json(van)
 
+
+
+
+
+export async function getVanById(req, res) {
+
+    try {
+        const { id } = req.params;
+        const van = await Van.findOne({ id: id });
+        return res.json(van)
+    }
+    catch (e) {
+        console.error("Error getting van data", e)
+    }
 }

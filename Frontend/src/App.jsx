@@ -32,6 +32,8 @@ export default function App() {
             <Route path='vans/:id' element={<VanDetails />} />
             <Route path='login' element={<Login />} />
 
+
+
             <Route element={<AuthRequired />}>
               <Route path='host' element={<HostLayout />}>
                 <Route index element={<Dashboard />} />
