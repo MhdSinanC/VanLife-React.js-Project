@@ -19,6 +19,7 @@ export default function Dashboard() {
                 setLoading(true)
                 const res = await apiFetch('/api/host/vans', token, setToken)
                 const data = await res.json()
+                console.log(data)
                 setVans(data || []);
 
             } catch (e) {
@@ -34,13 +35,13 @@ export default function Dashboard() {
     function renderVanElements(vans) {
         const hostVanEls = vans.map(van => (
 
-            <div key={van.id} className="host-van-card">
+            <div key={van._id} className="host-van-card">
                 <img src={van.imageUrl} alt={van.name} />
                 <div className="host-van-info">
                     <h3>{van.name}</h3>
                     <p>{`$${van.price}/day`}</p>
                 </div>
-                <Link className="dashboard-link-button ml-auto" to={`vans/${van.id}`}>View</Link>
+                <Link className="dashboard-link-button ml-auto" to={`vans/${van._id}`}>View</Link>
             </div>
         ))
 
@@ -83,7 +84,7 @@ export default function Dashboard() {
             <section className="host-dashboard-vans">
                 <div className="top">
                     <h2>Your listed vans</h2>
-                    <Link className="dashboard-link-button" to='vans'>View all</Link>
+                    {vans && <Link className="dashboard-link-button" to='vans'>View all</Link>}
                 </div>
                 {loading && !vans ?
                     <h1>Loading...</h1> :

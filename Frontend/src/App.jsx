@@ -19,6 +19,7 @@ import HostVanPhotos from './pages/Host/HostVanPhotos';
 import AuthRequired from './components/AuthRequired';
 
 import { AuthProvider } from '../Context/AuthContext';
+import SignUp from './pages/SignUp/SignUp';
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
             <Route path='vans' element={<Vans />} />
             <Route path='vans/:id' element={<VanDetails />} />
             <Route path='login' element={<Login />} />
+            <Route path='signup' element={<SignUp/>}/>
 
 
 

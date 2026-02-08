@@ -23,6 +23,8 @@
     background-color: white;
     padding: 1.56rem;
     border-radius: 6px;
+    min-width: 500px;
+    width: 100%;
 }
 
 .host-van-detail {
@@ -100,7 +102,7 @@
 
 
 .host-van-detail-nav>a.active {
-    text-decoration: 'underline';
+    text-decoration: underline;
     color: '#161616';
     font-weight: bold;
 }

@@ -20,7 +20,7 @@ export async function getVanById(req, res) {
 
     try {
         const { id } = req.params;
-        const van = await Van.findOne({ id: id });
+        const van = await Van.findOne({ _id: id });
         return res.json(van)
     }
     catch (e) {

@@ -7,7 +7,7 @@
 }
 
 .login-container>h1 {
-    margin-bottom: 3rem;
+    font-size: 1.8rem;
 }
 
 .login-form {
@@ -15,6 +15,7 @@
     flex-direction: column;
     width: 100%;
     max-width: 500px;
+    gap: 2rem;
 }
 
 .login-form>input {
@@ -42,4 +43,22 @@
     padding: 13px 17px;
     border: none;
     font-size: 18px;
+    cursor: pointer;
+}
+
+.login-form>button:hover {
+    background-color: #cb6f2d;
+}
+
+
+.login-form>button.disabled {
+    background-color: #bda99a;
+    color: #654747;
+    cursor: not-allowed;
+}
+
+.signup-link {
+    color: black;
+    margin-top: 0.5rem;
+    max-width: fit-content;
 }

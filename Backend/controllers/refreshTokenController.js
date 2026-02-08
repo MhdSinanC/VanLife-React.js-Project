@@ -21,7 +21,7 @@ export default async function refreshTokenController(req, res) {
         refreshToken,
         process.env.REFRESH_TOKEN_SECRET,
         (error, decoded) => {
-            if (error || user.id !== decoded.id) {
+            if (error || user._id.toString() !== decoded.id) {
                 return res.sendStatus(403);
             }
 

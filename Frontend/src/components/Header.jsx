@@ -18,10 +18,10 @@ export default function Header() {
                 credentials: 'include'
             })
 
-        }catch(e) {
+        } catch (e) {
             console.log('Logout request failed', e)
 
-        }finally {
+        } finally {
             setToken(null)
         }
     }
@@ -31,6 +31,13 @@ export default function Header() {
         <header>
             <Link className='site-logo' to='/'>#Vanlife</Link>
             <nav>
+
+                <NavLink
+                    to='/vans'
+                    className={({ isActive }) => isActive ? "activeLink" : ""}>
+                    Vans
+                </NavLink>
+
                 <NavLink
                     to='/host'
                     className={({ isActive }) => isActive ? "activeLink" : ""}>
@@ -43,11 +50,7 @@ export default function Header() {
                     About
                 </NavLink>
 
-                <NavLink
-                    to='/vans'
-                    className={({ isActive }) => isActive ? "activeLink" : ""}>
-                    Vans
-                </NavLink>
+
 
 
 

@@ -64,17 +64,17 @@ export default function HostVanDetail() {
                             <nav className="host-van-detail-nav">
                                 <NavLink to={'.'}
                                     end
-                                    className={(isActive) => isActive ? 'active' : ''}>
+                                    className={({isActive}) => isActive ? 'active' : ''}>
                                     Details
                                 </NavLink>
 
                                 <NavLink to={'pricing'}
-                                    className={(isActive) => isActive ? 'active' : ''}>
+                                    className={({isActive}) => isActive ? 'active' : ''}>
                                     Pricing
                                 </NavLink>
 
                                 <NavLink to={'photos'}
-                                    className={(isActive) => isActive ? 'active' : ''}>
+                                    className={({isActive}) => isActive ? 'active' : ''}>
                                     Photos
                                 </NavLink>
                             </nav>

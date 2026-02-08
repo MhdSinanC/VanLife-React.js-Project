@@ -2,11 +2,6 @@ import mongoose from "mongoose";
 
 
 const vansSchema = new mongoose.Schema({
-    id: {
-        type: Number,
-        required: true,
-        unique: true
-    },
     name: {
         type: String,
         required: true,
@@ -31,7 +26,8 @@ const vansSchema = new mongoose.Schema({
         required: true
     },
     hostId: {
-        type: Number,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     }
 })

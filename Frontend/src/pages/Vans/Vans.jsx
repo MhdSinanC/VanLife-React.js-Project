@@ -48,7 +48,7 @@ export default function Vans() {
 
     const vansCards = filteredVans.map(van => (
 
-        <Link key={van.id} to={`/vans/${van.id}`} state={{ search: searchParams.toString(), type: typeFilter }} className="link-reset">
+        <Link key={van._id} to={`/vans/${van._id}`} state={{ search: searchParams.toString(), type: typeFilter }} className="link-reset">
             <div className="van-card">
                 <img src={van.imageUrl} alt={van.name} />
                 <div className="van-info">

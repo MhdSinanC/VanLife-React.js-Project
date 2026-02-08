@@ -1,7 +1,10 @@
 import React from 'react';
 import './Login.css';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../Context/AuthContext';
+import { Alert, IconButton, InputAdornment, TextField } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility'
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 
 
 export default function Login() {
@@ -10,17 +13,18 @@ export default function Login() {
         IDLE: 'idle',
         SUBMITTING: 'submitting'
     }
-    
+
 
     const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" })
     const [status, setStatus] = React.useState(STATUS.IDLE);
     const [error, setError] = React.useState(null);
+    const [showPassword, setShowPassword] = React.useState(false);
 
-    const isDisabled = status === STATUS.SUBMITTING || !loginFormData.email.trim() || !loginFormData.password.trim() ;
+    const isDisabled = status === STATUS.SUBMITTING || !loginFormData.email.trim() || !loginFormData.password.trim();
 
     const location = useLocation();
     const navigate = useNavigate();
-    const {setToken} = useAuth();
+    const { setToken } = useAuth();
 
 
     const handleSubmit = async (e) => {
@@ -40,16 +44,18 @@ export default function Login() {
 
             const data = await res.json()
 
-            if(!res.ok) {
+            if (!res.ok) {
                 throw new Error(data.message)
             }
 
             setToken(data.token)
-            setStatus(STATUS.IDLE);
-            navigate(location.state?.from || '/host', {replace: true});
+            navigate(location.state?.from || '/host', { replace: true });
 
-        } catch (e) {
+        }
+        catch (e) {
             setError(e.message);
+        }
+        finally {
             setStatus(STATUS.IDLE);
         }
     }
@@ -69,16 +75,55 @@ export default function Login() {
 
     return (
         <div className="login-container">
-            {location.state?.message && <h3>{location.state.message}</h3>}
-            <h1>Sign in to your account</h1>
-            {error && <h3>{error}</h3>}
+            {location.state?.message && <Alert sx={{ backgroundColor: '#fde6c6' }} severity="warning">{location.state.message}</Alert>}
+            <h1>Log in to your account</h1>
+            {error && <Alert sx={{ backgroundColor: '#ff000030', marginBottom: '1rem' }} severity="error">{error}</Alert>}
             <form className="login-form" onSubmit={handleSubmit}>
 
-                <input name='email' type="email" placeholder="Email address" onChange={handleChange} value={loginFormData.email} />
+                <TextField
+                    label="Email"
+                    name='email'
+                    type='email'
+                    variant="outlined"
+                    onChange={handleChange}
+                    value={loginFormData.email}
+                    required
+                />
 
-                <input name='password' type="password" placeholder="Password" onChange={handleChange} value={loginFormData.password} />
+                <TextField
+                    label="Password"
+                    name='password'
+                    type={showPassword ? 'text' : 'password'}
+                    variant="outlined"
+                    className='input'
+                    onChange={handleChange}
+                    value={loginFormData.password}
+                    slotProps={{
+                        input: {
+                            endAdornment: (
+                                <InputAdornment position='end'>
+                                    <IconButton
+                                        onClick={() => setShowPassword(prev => !prev)}
+                                        edge='end'
+                                        aria-label={showPassword ? 'Hide password' : 'Show password'}
+                                    >
+                                        {showPassword ?
+                                            <VisibilityOffIcon /> :
+                                            <VisibilityIcon />}
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        }
+                    }}
+                    required
+                />
 
-                <button disabled={isDisabled}>{status === 'submitting' ? 'Logging In' : 'Log In'}</button>
+
+                <button disabled={isDisabled} className={isDisabled ? 'disabled' : ''}>
+                    {status === 'submitting' ? 'Logging In' : 'Log In'}
+                </button>
+
+                <Link className='signup-link' to={'/signup'}>Dont have an account</Link>
             </form>
         </div>
     )
