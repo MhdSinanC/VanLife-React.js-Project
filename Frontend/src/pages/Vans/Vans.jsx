@@ -50,7 +50,9 @@ export default function Vans() {
 
         <Link key={van._id} to={`/vans/${van._id}`} state={{ search: searchParams.toString(), type: typeFilter }} className="link-reset">
             <div className="van-card">
-                <img src={van.imageUrl} alt={van.name} />
+                <div className="image-container">
+                    <img src={van.imageUrl} alt={van.name} />
+                </div>
                 <div className="van-info">
                     <h3>{van.name}</h3>
                     <p><b>${van.price}</b><span>/day</span></p>

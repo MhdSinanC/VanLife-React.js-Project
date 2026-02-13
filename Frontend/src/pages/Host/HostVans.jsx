@@ -3,7 +3,7 @@ import './HostVans.css';
 import { Link } from 'react-router-dom';
 import { apiFetch } from '../../../utils/apiFetch';
 import { useAuth } from '../../../Context/AuthContext';
-
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 
 export default function HostVans() {
@@ -12,7 +12,7 @@ export default function HostVans() {
     const [error, setError] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
 
-    const {token, setToken} = useAuth()
+    const { token, setToken } = useAuth()
 
     React.useEffect(() => {
         const loadVans = async () => {
@@ -49,7 +49,11 @@ export default function HostVans() {
 
     return (
         <section>
-            <h1>Your listed vans</h1>
+            <div className='host-vans-title-container'>
+                <h1>Your listed vans</h1>
+                <Link to={'new'}><AddCircleOutlineIcon /></Link>
+            </div>
+
             <div className="host-vans-list-container">
 
                 {loading && <h2 className='van-loading'>Loading..</h2>}

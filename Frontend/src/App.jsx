@@ -20,6 +20,7 @@ import AuthRequired from './components/AuthRequired';
 
 import { AuthProvider } from '../Context/AuthContext';
 import SignUp from './pages/SignUp/SignUp';
+import NewHostVan from './pages/Host/NewHostVan';
 
 export default function App() {
   return (
@@ -32,7 +33,7 @@ export default function App() {
             <Route path='vans' element={<Vans />} />
             <Route path='vans/:id' element={<VanDetails />} />
             <Route path='login' element={<Login />} />
-            <Route path='signup' element={<SignUp/>}/>
+            <Route path='signup' element={<SignUp />} />
 
 
 
@@ -40,12 +41,15 @@ export default function App() {
               <Route path='host' element={<HostLayout />}>
                 <Route index element={<Dashboard />} />
                 <Route path='income' element={<Income />} />
-                <Route path='vans' element={<HostVans />} />
                 <Route path='reviews' element={<Reviews />} />
-                <Route path='vans/:id' element={<HostVanDetail />}>
-                  <Route index element={<HostVanInfo />} />
-                  <Route path='pricing' element={<HostVanPricing />} />
-                  <Route path='photos' element={<HostVanPhotos />} />
+                <Route path='vans'>
+                  <Route index element={<HostVans />} />
+                  <Route path='new' element={<NewHostVan/>}/>
+                  <Route path=':id' element={<HostVanDetail />}>
+                    <Route index element={<HostVanInfo />} />
+                    <Route path='pricing' element={<HostVanPricing />} />
+                    <Route path='photos' element={<HostVanPhotos />} />
+                  </Route>
                 </Route>
               </Route>
             </Route>

@@ -1,3 +1,5 @@
+import dotenv from 'dotenv'
+dotenv.config()
 import express from 'express'
 import vanRouter from './routes/vanRoutes.js'
 import hostVanRouter from './routes/hostVanRoutes.js';
@@ -5,11 +7,9 @@ import authRouter from './routes/authRouter.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
 
-import dotenv from 'dotenv'
+
 import { protect } from './middleware/authMiddleware.js';
 import connectDB from './config/connectDB.js';
-dotenv.config()
-
 
 const app = express()
 
@@ -26,12 +26,12 @@ app.use(cors({
     credentials: true
 }))
 
+
 app.use('/api', vanRouter)
 
 app.use('/api/host', protect, hostVanRouter)
 
 app.use('/api/auth', authRouter)
-
 
 
 app.listen(PORT, () => {

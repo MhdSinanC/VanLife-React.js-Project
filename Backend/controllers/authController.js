@@ -113,29 +113,23 @@ export async function signupUser(req, res) {
         const hashedPassword = await bcrypt.hash(password, 10);
 
 
-        //5.getting a new user id for the new user from last user
-        const lastUser = await User.findOne().sort({id: -1});
-        const newId = lastUser ? lastUser.id + 1 : 1; 
 
-
-
-        //6.create User
+        //5.create User
         const user = await User.create({
-            id: newId,
             email: email,
             password: hashedPassword,
             name: username
         })
 
-        //7.generate tokens
+        //6.generate tokens
         const accessToken = generateToken(user);
         const refreshToken = generateRefreshToken(user);
 
-        //8. save refresh token in User DB
+        //7. save refresh token in User DB
         user.refreshToken = refreshToken;
         await user.save();
 
-        //9.set refresh token cookie
+        //8.set refresh token cookie
         res.cookie("jwt", refreshToken, {
             httpOnly: true,
             secure: false,
@@ -143,7 +137,7 @@ export async function signupUser(req, res) {
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
 
-        //10.send access token to frontend memory
+        //9.send access token to frontend memory
         res.status(201).json({ message: 'Login Successful', token: accessToken });
     }
     catch (e) {

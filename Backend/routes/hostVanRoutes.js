@@ -1,9 +1,11 @@
 import express from 'express'
-import { getHostVans } from '../controllers/hostVansController.js';
+import { getHostVans, postHostVan } from '../controllers/hostVansController.js';
 import { getVanById } from '../controllers/vansController.js';
 
 
 const hostVanRouter = express.Router();
+
+hostVanRouter.post('/vans', postHostVan)
 
 hostVanRouter.get('/vans', getHostVans)
 

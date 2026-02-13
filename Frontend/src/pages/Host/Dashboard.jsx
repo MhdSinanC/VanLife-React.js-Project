@@ -35,7 +35,7 @@ export default function Dashboard() {
     function renderVanElements(vans) {
         const hostVanEls = vans.map(van => (
 
-            <div key={van._id} className="host-van-card">
+            <div key={van._id} className="host-van-card" style={{maxHeight: 'none'}}>
                 <img src={van.imageUrl} alt={van.name} />
                 <div className="host-van-info">
                     <h3>{van.name}</h3>

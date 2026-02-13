@@ -1,0 +1,33 @@
+.new-van-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-inline: 1rem;
+    gap: 2rem;
+    margin-block: 1rem;
+}
+
+
+.van-type-and-price-container {
+    display: flex;
+    gap: 1rem;
+}
+
+
+.add-new-van-button {
+    background-color: #FF8C38;
+    color: white;
+    font-weight: 700;
+    border-radius: 6px;
+    padding: 13px 17px;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    max-width: 26.9rem;
+    width: 100%;
+}
+
+.add-new-van-button.disabled {
+    cursor: not-allowed;
+}
