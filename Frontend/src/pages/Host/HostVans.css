@@ -34,7 +34,10 @@ div.host-vans-list-container {
 
 .host-van-card>img {
     max-width: 5rem;
+    max-height: 5rem;
     border-radius: 0.4rem;
+    height: 100%;
+    width: 100%;
 }
 
 .host-van-info>h3 {
@@ -87,6 +90,7 @@ div.host-vans-list-container {
 
     .host-van-card>img {
         min-width: 100%;
+        max-height: 263px;
         height: 100%;
         object-fit: cover;
     }

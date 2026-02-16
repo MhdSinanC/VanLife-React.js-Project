@@ -43,7 +43,7 @@ export default function Vans() {
         }
         loadVans();
 
-    }, [])
+    }, [vans])
 
 
     const vansCards = filteredVans.map(van => (
@@ -53,11 +53,14 @@ export default function Vans() {
                 <div className="image-container">
                     <img src={van.imageUrl} alt={van.name} />
                 </div>
-                <div className="van-info">
-                    <h3>{van.name}</h3>
-                    <p><b>${van.price}</b><span>/day</span></p>
+                <div className="info-container">
+                    <div className="van-info">
+                        <h3>{van.name}</h3>
+                        <p><b>${van.price}</b><span>/day</span></p>
+                    </div>
+                    <i className={`van-type ${van.type}`}>{van.type[0].toUpperCase() + van.type.slice(1)}</i>
                 </div>
-                <i className={`van-type ${van.type}`}>{van.type[0].toUpperCase() + van.type.slice(1)}</i>
+
             </div>
         </Link>
     ))

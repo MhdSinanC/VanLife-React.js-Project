@@ -67,6 +67,20 @@
 }
 
 
+.delete-edit-button-container>button {
+    border: none;
+    background: none;
+    margin-top: 0.5rem;
+}
+
+.delete-button {
+    color: rgba(255, 0, 0, 0.678);
+}
+
+.edit-button {
+    color: rgb(46, 56, 174);
+}
+
 
 .host-van-detail-info>h2 {
     margin-bottom: 0;
