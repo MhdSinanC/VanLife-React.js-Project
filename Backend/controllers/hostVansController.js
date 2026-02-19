@@ -41,6 +41,43 @@ export async function postHostVan(req, res) {
 }
 
 
+
+
+export async function updateVan(req, res) {
+
+    try {
+        const { id } = req.params;
+
+        const van = await Van.findById(id);
+
+        if (!van) {
+            return res.status(404).json({ message: 'Van not found' })
+        }
+
+        //ownership check
+        if (van.hostId.toString() !== req.user.id) {
+            return res.status(403).json({ message: 'Not Authorized' });
+        }
+
+        const updatedVan = await Van.findByIdAndUpdate(
+            id,
+            req.body,
+            {
+                new: true,
+                runValidators: true
+            }
+        )
+
+        return res.json(updatedVan);
+    }
+    catch (e) {
+        console.error(e);
+        res.status(500).json({ message: "Update Failed" })
+    }
+
+}
+
+
 export async function deleteHostVan(req, res) {
     try {
         const { id } = req.params;

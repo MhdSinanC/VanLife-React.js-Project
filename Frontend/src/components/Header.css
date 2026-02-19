@@ -3,6 +3,7 @@ header {
     display: flex;
     align-items: center;
     padding: 1rem 1.1rem;
+    position: relative;
 }
 
 header .site-logo {
@@ -13,10 +14,19 @@ header .site-logo {
     text-transform: uppercase;
 }
 
+.menu-btn {
+    display: none;
+    font-size: 26px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
 header nav {
     display: flex;
     gap: 10px;
     margin-right: 0.2rem;
+    align-items: center;
 }
 
 header a {
@@ -39,6 +49,7 @@ header a.activeLink {
 
 .login-icon {
     font-size: 1.5rem;
+    margin-top: 0.4rem;
 }
 
 header button {
@@ -50,6 +61,30 @@ header button {
     font-size: 1.5rem;
 }
 
+
+/* for small screen  */
+@media (max-width: 500px) {
+    .menu-btn {
+        display: block;
+    }
+
+    header nav {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background-color: #FFF7ED;
+        flex-direction: column;
+        width: 100%;
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        display: none;
+        z-index: 1000;
+    }
+
+    nav.active {
+        display: flex;
+    }
+}
 
 
 /* responsive */

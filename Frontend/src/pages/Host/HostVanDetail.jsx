@@ -91,9 +91,9 @@ export default function HostVanDetail() {
                                 <button onClick={deleteVan} className="delete-button">
                                     <DeleteIcon />
                                 </button>
-                                <button className="edit-button">
+                                <Link className="edit-button" to={`/host/vans/${id}/edit`}>
                                     <EditIcon />
-                                </button>
+                                </Link>
                             </div>
 
                             <nav className="host-van-detail-nav">

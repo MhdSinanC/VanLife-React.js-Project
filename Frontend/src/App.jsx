@@ -21,6 +21,7 @@ import AuthRequired from './components/AuthRequired';
 import { AuthProvider } from '../Context/AuthContext';
 import SignUp from './pages/SignUp/SignUp';
 import NewHostVan from './pages/Host/NewHostVan';
+import EditHostVan from './pages/Host/EditHostVan';
 
 export default function App() {
   return (
@@ -44,12 +45,13 @@ export default function App() {
                 <Route path='reviews' element={<Reviews />} />
                 <Route path='vans'>
                   <Route index element={<HostVans />} />
-                  <Route path='new' element={<NewHostVan/>}/>
+                  <Route path='new' element={<NewHostVan />} />
                   <Route path=':id' element={<HostVanDetail />}>
                     <Route index element={<HostVanInfo />} />
                     <Route path='pricing' element={<HostVanPricing />} />
                     <Route path='photos' element={<HostVanPhotos />} />
                   </Route>
+                  <Route path=':id/edit' element={<EditHostVan/>}/>
                 </Route>
               </Route>
             </Route>

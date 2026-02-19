@@ -180,3 +180,19 @@
     }
 
 }
+
+
+@media (max-width: 500px) {
+
+    .van-list-title {
+        font-size: 1.7rem;
+    }
+
+    .van-list-filter-buttons .van-type {
+        padding: 6px;
+    }
+
+    .van-list-filter-buttons .van-type.clear-filters {
+        padding: 2px 5px;
+    }
+}

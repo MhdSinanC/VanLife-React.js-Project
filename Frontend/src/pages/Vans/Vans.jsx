@@ -1,6 +1,7 @@
 import React from "react";
 import './Vans.css';
 import { Link, useSearchParams } from "react-router-dom";
+import CancelIcon from '@mui/icons-material/Cancel';
 
 
 export default function Vans() {
@@ -69,7 +70,7 @@ export default function Vans() {
     return (
         <>
             <div className="van-list-container">
-                <h1>Explore our van options</h1>
+                <h1 className="van-list-title">Explore our van options</h1>
 
                 <div className="van-list-filter-buttons">
                     <button
@@ -91,7 +92,7 @@ export default function Vans() {
                         <button
                             onClick={() => handleFilterChange('type', null)}
                             className="van-type clear-filters" >
-                            Clear filter
+                            <CancelIcon />
                         </button> : null}
                 </div>
 
