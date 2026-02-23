@@ -30,8 +30,8 @@ export async function loginUser(req, res) {
     //send refresh token as httpOnly cookie
     res.cookie("jwt", refreshToken, {
         httpOnly: true,
-        secure: false,
-        sameSite: 'strict',
+        secure: true,
+        sameSite: 'None',
         maxAge: 7 * 24 * 60 * 60 * 1000
     })
 
@@ -68,8 +68,8 @@ export async function logOutUser(req, res) {
     //clear cookie
     res.clearCookie('jwt', {
         httpOnly: true,
-        sameSite: 'strict',
-        secure: false,
+        sameSite: 'None',
+        secure: true,
     })
 
     return res.sendStatus(204);
@@ -132,8 +132,8 @@ export async function signupUser(req, res) {
         //8.set refresh token cookie
         res.cookie("jwt", refreshToken, {
             httpOnly: true,
-            secure: false,
-            sameSite: 'strict',
+            secure: true,
+            sameSite: 'None',
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
 
