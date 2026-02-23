@@ -30,7 +30,7 @@ export default function EditHostVan() {
 
     const handleUpdateVan = async (formData) => {
         try {
-            const res = await fetch(`/api/host/vans/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/host/vans/${id}`, {
                 method: 'PUT',
                 headers: {
                     "Content-Type": "application/json",
