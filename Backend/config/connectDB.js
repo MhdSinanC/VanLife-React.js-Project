@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 export default async function connectDB() {
     try {
-        await mongoose.connect("mongodb://localhost:27017/VanLife")
+        await mongoose.connect(process.env.MONGODB_URL)
         console.log("MongoDB connected! [mongoose]");
     }
     catch (e) {

@@ -6,9 +6,10 @@ import { getVanById } from '../controllers/vansController.js';
 
 const hostVanRouter = express.Router();
 
-hostVanRouter.post('/vans', postHostVan)
 
 hostVanRouter.get('/vans', getHostVans)
+
+hostVanRouter.post('/vans', postHostVan)
 
 hostVanRouter.get('/vans/:id', getVanById)
 

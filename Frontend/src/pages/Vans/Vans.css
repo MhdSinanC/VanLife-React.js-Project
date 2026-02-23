@@ -23,6 +23,11 @@
     text-decoration: underline;
 }
 
+.van-list-filter-buttons .van-type.clear-filters > svg {
+    font-size: 15px;
+    margin-top: 2px;
+}
+
 
 .van-list-filter-buttons .van-type.simple:hover {
     background-color: #E17654;
