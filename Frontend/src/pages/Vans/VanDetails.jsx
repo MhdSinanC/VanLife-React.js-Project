@@ -17,7 +17,7 @@ export default function VanDetails() {
 
             try {
                 
-                const res = await fetch(`/api/vans/${id}`)     
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/vans/${id}`)     
                 const data = await res.json()
                 setVan(data);
 

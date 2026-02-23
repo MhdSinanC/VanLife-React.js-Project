@@ -8,7 +8,7 @@ export const apiFetch = async (url, token, setToken) => {
     })
 
     if (res.status === 401) {
-        const refreshRes = await fetch('/api/auth/refresh', {
+        const refreshRes = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/refresh`, {
             credentials: 'include'
         })
 

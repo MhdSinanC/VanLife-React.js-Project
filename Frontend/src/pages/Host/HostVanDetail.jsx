@@ -29,7 +29,7 @@ export default function HostVanDetail() {
         const loadVans = async () => {
 
             try {
-                const res = await apiFetch(`/api/host/vans/${id}`, token, setToken)
+                const res = await apiFetch(`${import.meta.env.VITE_API_URL}/api/host/vans/${id}`, token, setToken)
                 const data = await res.json()
                 setCurrentVan(data);
 

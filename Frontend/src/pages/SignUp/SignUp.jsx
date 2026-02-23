@@ -53,7 +53,7 @@ export default function SignUp() {
         }
 
         try {
-            const res = await fetch('/api/auth/signup', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/signup`, {
                 method: 'post',
                 credentials: 'include',
                 headers: {

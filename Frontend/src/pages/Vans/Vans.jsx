@@ -30,7 +30,7 @@ export default function Vans() {
         const loadVans = async () => {
 
             try {
-                const res = await fetch('/api/vans');
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/vans`);
                 const data = await res.json()
                 setVans(data || []);
 

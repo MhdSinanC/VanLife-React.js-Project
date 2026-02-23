@@ -17,7 +17,7 @@ export default function NewHostVan() {
     const onSubmit = async (formData) => {
 
         try {
-            const res = await fetch('/api/host/vans', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/host/vans`, {
                 method: 'post',
                 headers: {
                     "Content-Type": "application/json",

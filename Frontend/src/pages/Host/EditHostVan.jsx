@@ -15,7 +15,7 @@ export default function EditHostVan() {
     React.useEffect(() => {
 
         const fetchVan = async () => {
-            const res = await fetch(`/api/host/vans/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/host/vans/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             const data = await res.json();

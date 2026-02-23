@@ -17,7 +17,7 @@ export default function Dashboard() {
         const loadVans = async () => {
             try {
                 setLoading(true)
-                const res = await apiFetch('/api/host/vans', token, setToken)
+                const res = await apiFetch(`${import.meta.env.VITE_API_URL}/api/host/vans`, token, setToken)
                 const data = await res.json()
                 console.log(data)
                 setVans(data || []);
