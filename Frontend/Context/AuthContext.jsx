@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
     React.useEffect(() => {
         const refreshAccessToken = async() => {
             try {
-                const res = await fetch('/api/auth/refresh', {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/refresh`, {
                     credentials: 'include'
                 })
 

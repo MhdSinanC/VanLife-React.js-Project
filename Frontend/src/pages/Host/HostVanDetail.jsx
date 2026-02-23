@@ -52,7 +52,7 @@ export default function HostVanDetail() {
         if(!confirmDelete) return;
 
         try {
-            const res = await fetch(`/api/host/vans/${currentVan._id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/host/vans/${currentVan._id}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${token}`
