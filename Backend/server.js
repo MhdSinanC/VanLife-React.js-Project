@@ -22,7 +22,7 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use(cors({
-    origin: '*',
+    origin: 'https://van-life-react-js-project.vercel.app/',
     credentials: true
 }))
 
