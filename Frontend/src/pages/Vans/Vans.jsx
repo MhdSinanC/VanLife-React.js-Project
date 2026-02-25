@@ -44,7 +44,7 @@ export default function Vans() {
         }
         loadVans();
 
-    }, [vans])
+    }, [])
 
 
     const vansCards = filteredVans.map(van => (

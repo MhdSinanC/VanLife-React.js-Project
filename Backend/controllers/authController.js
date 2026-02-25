@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs'
 import User from '../models/User.js';
 import { generateRefreshToken, generateToken } from '../utils/generateTokens.js';
 
+const isProduction = process.env.NODE_ENV === 'production';
 
 //Login User controller
 export async function loginUser(req, res) {
@@ -30,8 +31,8 @@ export async function loginUser(req, res) {
     //send refresh token as httpOnly cookie
     res.cookie("jwt", refreshToken, {
         httpOnly: true,
-        secure: true,
-        sameSite: 'None',
+        secure: isProduction,
+        sameSite: isProduction ? 'None' : 'Strict',
         maxAge: 7 * 24 * 60 * 60 * 1000
     })
 
@@ -68,8 +69,8 @@ export async function logOutUser(req, res) {
     //clear cookie
     res.clearCookie('jwt', {
         httpOnly: true,
-        sameSite: 'None',
-        secure: true,
+        sameSite: isProduction ? 'None' : 'Strict',
+        secure: isProduction,
     })
 
     return res.sendStatus(204);
@@ -132,8 +133,8 @@ export async function signupUser(req, res) {
         //8.set refresh token cookie
         res.cookie("jwt", refreshToken, {
             httpOnly: true,
-            secure: true,
-            sameSite: 'None',
+            secure: isProduction,
+            sameSite: isProduction ? 'None' : 'Strict',
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
 

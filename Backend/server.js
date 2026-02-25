@@ -11,6 +11,8 @@ import cookieParser from 'cookie-parser';
 import { protect } from './middleware/authMiddleware.js';
 import connectDB from './config/connectDB.js';
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 const app = express()
 
 const PORT = 8000;
@@ -22,7 +24,9 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use(cors({
-    origin: 'https://van-life-react-js-project.vercel.app',
+    origin: isProduction
+        ? 'https://van-life-react-js-project.vercel.app'
+        : 'http://localhost:5173',
     credentials: true
 }))
 
