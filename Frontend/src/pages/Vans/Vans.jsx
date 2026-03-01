@@ -31,8 +31,8 @@ export default function Vans() {
 
             try {
                 const res = await fetch(`${import.meta.env.VITE_API_URL}/api/vans`);
-                const data = await res.json()
-                setVans(data || []);
+                const vans = await res.json()
+                setVans(vans.data || []);
 
             } catch (e) {
                 setError(e.message || 'Something went Wrong');

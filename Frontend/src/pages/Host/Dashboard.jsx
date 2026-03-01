@@ -18,9 +18,8 @@ export default function Dashboard() {
             try {
                 setLoading(true)
                 const res = await apiFetch(`${import.meta.env.VITE_API_URL}/api/host/vans`, token, setToken)
-                const data = await res.json()
-                console.log(data)
-                setVans(data || []);
+                const vans = await res.json()
+                setVans(vans || []);
 
             } catch (e) {
                 setError(e.message || 'Something went wrong!');

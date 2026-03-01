@@ -30,8 +30,8 @@ export default function HostVanDetail() {
 
             try {
                 const res = await apiFetch(`${import.meta.env.VITE_API_URL}/api/host/vans/${id}`, token, setToken)
-                const data = await res.json()
-                setCurrentVan(data);
+                const van = await res.json()
+                setCurrentVan(van.data);
 
             } catch (e) {
                 setError(e.message || 'Something went wrong!');
