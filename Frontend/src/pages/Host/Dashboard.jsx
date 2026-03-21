@@ -11,7 +11,7 @@ export default function Dashboard() {
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState(null);
 
-    const {token, setToken} = useAuth();
+    const { token, setToken } = useAuth();
 
     React.useEffect(() => {
         const loadVans = async () => {
@@ -34,7 +34,7 @@ export default function Dashboard() {
     function renderVanElements(vans) {
         const hostVanEls = vans.map(van => (
 
-            <div key={van._id} className="host-van-card" style={{maxHeight: 'none'}}>
+            <div key={van._id} className="host-van-card" style={{ maxHeight: 'none' }}>
                 <img src={van.imageUrl} alt={van.name} />
                 <div className="host-van-info">
                     <h3>{van.name}</h3>
@@ -85,13 +85,21 @@ export default function Dashboard() {
                     <h2>Your listed vans</h2>
                     {vans && <Link className="dashboard-link-button" to='vans'>View all</Link>}
                 </div>
-                {loading && !vans ?
+                {/* {loading && !vans ?
                     <h1>Loading...</h1> :
                     (
                         <>
                             {renderVanElements(vans)}
                         </>
-                    )}
+                    )} */}
+                <div className="main">
+                    {loading ?
+                        <h3>Loading..</h3>
+                        : vans.length === 0 ?
+                            <h3>No vans found</h3>
+                            : renderVanElements(vans)}
+                </div>
+
             </section>
 
         </>

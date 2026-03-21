@@ -39,14 +39,7 @@ export default function Header() {
             >
                 {menuOpen ? 'X' : '☰'}
             </button>
-            {
-                    token ?
-                        <button onClick={onLogOut}><IoMdLogOut className="logout-icon" /></button>
-                        : <NavLink
-                            to='/login'>
-                            <CgProfile className="login-icon" />
-                        </NavLink>
-                }
+            
             <nav className={menuOpen ? 'nav active' : 'nav'} onClick={() => setMenuOpen(false)}>
 
                 <NavLink
@@ -66,13 +59,17 @@ export default function Header() {
                     className={({ isActive }) => isActive ? "activeLink" : ""}>
                     About
                 </NavLink>
-
-
-
-
-
                 
             </nav>
+            
+            {
+                    token ?
+                        <button onClick={onLogOut}><IoMdLogOut className="logout-icon" /></button>
+                        : <NavLink
+                            to='/login'>
+                            <CgProfile className="login-icon" />
+                        </NavLink>
+                }
         </header>
     )
 }

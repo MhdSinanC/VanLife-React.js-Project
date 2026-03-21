@@ -72,6 +72,10 @@
     padding-inline: 1rem;
 }
 
+.host-dashboard-vans>.main {
+    padding-inline: 1rem;
+}
+
 @media screen and (max-width: 750px) {
     .ml-auto {
         margin-left: auto;
