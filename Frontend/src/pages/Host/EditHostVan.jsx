@@ -22,7 +22,7 @@ export default function EditHostVan() {
             if (!res.ok) {
                 setError("Couldn't fetch the van data")
             }
-            setVan(data);
+            setVan(data.data);
         }
         fetchVan();
     }, [id, token])
