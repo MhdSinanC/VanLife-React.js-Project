@@ -53,7 +53,7 @@ export default function Dashboard() {
 
 
     if (error) {
-        return <h1>Error: {error.message}</h1>
+        return <h1>Error: {error}</h1>
     }
 
 
@@ -85,13 +85,7 @@ export default function Dashboard() {
                     <h2>Your listed vans</h2>
                     {vans && <Link className="dashboard-link-button" to='vans'>View all</Link>}
                 </div>
-                {/* {loading && !vans ?
-                    <h1>Loading...</h1> :
-                    (
-                        <>
-                            {renderVanElements(vans)}
-                        </>
-                    )} */}
+
                 <div className="main">
                     {loading ?
                         <h3>Loading..</h3>
