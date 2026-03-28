@@ -1,42 +1,49 @@
 import { NavLink, Outlet } from "react-router-dom";
 import './HostLayout.css';
 
-export default function HostLayout() {
 
-    const activeStyle = {
-        fontWeight: 'bold',
-        textDecoration: 'underline',
-        color: '#161616'
-    }
+/**
+ * HostLayout
+ * -----------
+ * Layout component for all "host" related pages.
+ * Provides a shared navigation bar and renders nested routes using <Outlet />.
+ */
+export default function HostLayout() {
 
     return (
         <>
+            {/* Navigation specific to host dashboard */}
             <nav className="host-nav">
                 <NavLink
                     to={'.'}
-                    end
-                    style={({ isActive }) => isActive ? activeStyle : null}>
+                    end         // Ensures this only matches the exact parent route
+                    className={({ isActive }) => isActive ? 'active-link' : ''}>
                     Dashboard
                 </NavLink>
 
                 <NavLink
                     to={'income'}
-                    style={({ isActive }) => isActive ? activeStyle : null}>
+                    className={({ isActive }) => isActive ? 'active-link' : ''}
+                >
                     Income
                 </NavLink>
 
                 <NavLink
                     to={'vans'}
-                    style={({ isActive }) => isActive ? activeStyle : null}>
+                    className={({ isActive }) => isActive ? 'active-link' : ''}
+                    >
                     Vans
                 </NavLink>
 
                 <NavLink
                     to={'reviews'}
-                    style={({ isActive }) => isActive ? activeStyle : null}>
+                    className={({ isActive }) => isActive ? 'active-link' : ''}
+                    >
                     Reviews
                 </NavLink>
             </nav>
+
+            {/* Renders the matched child route */}
             <Outlet />
         </>
     )
