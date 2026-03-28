@@ -1,25 +1,40 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { BsStarFill } from "react-icons/bs"
 import { Link } from "react-router-dom"
 import './Dashboard.css'
 import { apiFetch } from "../../../utils/apiFetch";
 import { useAuth } from "../../../Context/AuthContext";
 
+
+/**
+ * Dashboard
+ * ----------
+ * Host dashboard displaying:
+ * - Earnings summary
+ * - Review score
+ * - List of host's vans
+ */
 export default function Dashboard() {
 
-    const [vans, setVans] = React.useState([]);
-    const [loading, setLoading] = React.useState(false);
-    const [error, setError] = React.useState(null);
+    const [vans, setVans] = useState([]);               // Stores fetched vans
+    const [loading, setLoading] = useState(false);      // Tracks loading state
+    const [error, setError] = useState(null);           // Stores error message (if any)
 
-    const { token, setToken } = useAuth();
+    const { token, setToken } = useAuth();              // Auth context (for protected API calls)
 
-    React.useEffect(() => {
+
+    /**
+     * Fetch host vans on component mount and refetch when token updates
+     */
+    useEffect(() => {
         const loadVans = async () => {
             try {
                 setLoading(true)
+                // Custom fetch utility (handles auth + token refresh)
                 const res = await apiFetch(`${import.meta.env.VITE_API_URL}/api/host/vans`, token, setToken)
-                const vans = await res.json()
-                setVans(vans || []);
+                const data = await res.json()
+                // Ensure safe fallback if response is empty
+                setVans(data || []);
 
             } catch (e) {
                 setError(e.message || 'Something went wrong!');
@@ -28,9 +43,15 @@ export default function Dashboard() {
                 setLoading(false);
             }
         }
-        loadVans();
-    }, [])
 
+        if (!token) return;     // wait until token exists
+        loadVans();
+
+    }, [token])
+
+    /**
+     * Renders list of vans
+     */
     function renderVanElements(vans) {
         const hostVanEls = vans.map(van => (
 
@@ -51,7 +72,7 @@ export default function Dashboard() {
         )
     }
 
-
+    // Error state UI
     if (error) {
         return <h1>Error: {error}</h1>
     }
@@ -60,6 +81,7 @@ export default function Dashboard() {
 
     return (
         <>
+            {/* Earnings section */}
             <section className="host-dashboard-earnings">
                 <div className="earnings-info">
                     <h1>Welcome!</h1>
@@ -69,6 +91,7 @@ export default function Dashboard() {
                 <Link className="dashboard-link-button" to={'income'}>Details</Link>
             </section>
 
+            {/* Reviews section */}
             <section className="host-dashboard-reviews">
                 <div className="reviews-info">
                     <h2>Review score</h2>
@@ -80,10 +103,11 @@ export default function Dashboard() {
                 <Link className="dashboard-link-button" to={'reviews'}>Details</Link>
             </section>
 
+            {/* Vans listing section */}
             <section className="host-dashboard-vans">
                 <div className="top">
                     <h2>Your listed vans</h2>
-                    {vans && <Link className="dashboard-link-button" to='vans'>View all</Link>}
+                    {vans.length > 0 && <Link className="dashboard-link-button" to='vans'>View all</Link>}
                 </div>
 
                 <div className="main">
