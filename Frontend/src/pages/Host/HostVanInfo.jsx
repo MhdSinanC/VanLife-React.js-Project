@@ -11,8 +11,9 @@ export default function HostVanInfo() {
     // Access shared data passed from parent (HostVanDetail)
     const { currentVan } = useOutletContext();
 
-    if(!currentVan) return <p>Loading...</p>
-    
+    // Optional safety check (prevents crash if data is not ready)
+    if (!currentVan) return <p>Loading...</p>
+
     return (
         <div className="host-van-nested-info">
             <h4>Name: <span>{currentVan.name}</span></h4>
