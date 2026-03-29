@@ -15,12 +15,10 @@ export default function HostVanPhotos() {
     if (!currentVan) return <p>Loading....</p>
 
     return (
-        <>
             <img
                 className="host-van-nested-photos"
                 src={currentVan.imageUrl}
                 alt={currentVan.name}
             />
-        </>
     )
 }
