@@ -44,9 +44,22 @@ export default function VanDetails() {
     }, [id])
 
     //Loading state
-    if (loading) return <h2 style={{ textAlign: 'center' }}>Fetching van details..</h2>
+    if (loading) {
+        return (
+            <div className="van-detail-wrapper">
+                <h2 style={{ textAlign: 'center' }}>Fetching van details...</h2>
+            </div>
+        )
+    }
+
     // Error state
-    if (error) return <h3>{error}</h3>
+    if (error) {
+        return (
+            <div className="van-detail-wrapper">
+                <h3 style={{textAlign: 'center'}}>{error}</h3>
+            </div>
+        )
+    }
 
     return (
         <div className="van-detail-wrapper">
