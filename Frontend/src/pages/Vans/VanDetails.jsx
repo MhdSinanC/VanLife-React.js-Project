@@ -1,30 +1,41 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
 import './VanDetails.css';
 
+// Component to display details of a single van
 export default function VanDetails() {
 
-    const [error, setError] = React.useState(null);
-    const [loading, setLoading] = React.useState(true);
-    const [van, setVan] = React.useState(null);
+    // State management
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [van, setVan] = useState(null);
 
+    // Access route params and location state
+    const { id } = useParams();
     const location = useLocation();
 
-    const { id } = useParams();
-
-    React.useEffect(() => {
+    // Fetch van details on component mount / id change
+    useEffect(() => {
         const loadVans = async () => {
 
             try {
-                
-                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/vans/${id}`)     
-                const van = await res.json()
-                setVan(van.data);
+                // API call to fetch van by ID
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/vans/${id}`)
+                const data = await res.json()
+
+                if (!res.ok) {
+                    throw new Error('Failed to fetch van details')
+                }
+
+                // Store fetched van data
+                setVan(data.data);
 
             } catch (e) {
+                // Handle errors
                 setError(e.message || 'Something went wrong!');
 
             } finally {
+                // Stop loading
                 setLoading(false);
             }
 
@@ -32,27 +43,44 @@ export default function VanDetails() {
         loadVans();
     }, [id])
 
+    //Loading state
+    if (loading) return <h2 style={{ textAlign: 'center' }}>Fetching van details..</h2>
+    // Error state
+    if (error) return <h3>{error}</h3>
+
     return (
         <div className="van-detail-wrapper">
+            {/* Back navigation (preserves previous filters/search params) */}
             <Link to={`..?${location.state?.search}`} relative='path' className='back-button'>
                 &larr;<span>Back to {location.state?.type ?? 'all'} vans</span>
             </Link>
+
             <div className="van-detail-container">
+
+                {/* Van details (render only when data is available) */}
                 {van && (
                     <div className='van-detail'>
                         <img src={van.imageUrl} alt={van.name} />
+
                         <div className="van-detail-info">
+                            {/* Van type badge */}
                             <span className={`van-type ${van.type}`}>{van.type}</span>
+
                             <h2>{van.name}</h2>
+
+                            {/* Pricing */}
                             <p className='van-price'><span>${van.price}</span>/day</p>
+
+                            {/* Description */}
                             <p className='van-description'>{van.description}</p>
+
+                            {/* Action button */}
                             <button className='link-button'>Rent this van</button>
                         </div>
 
                     </div>
                 )}
-                {loading && <h2 style={{ textAlign: 'center' }}>Loading..</h2>}
-                {error && <h3>{error}</h3>}
+
             </div>
         </div>
     )
