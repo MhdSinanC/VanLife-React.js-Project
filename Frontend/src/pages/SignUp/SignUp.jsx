@@ -1,52 +1,69 @@
-import React from 'react';
+import { useState } from 'react';
 import './SignUp.css'
+// Material UI components for layout and inputs
 import { Box, IconButton, InputAdornment, TextField } from '@mui/material';
 import Alert from '@mui/material/Alert';
+// Auth + routing
 import { useAuth } from '../../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+// Icons for password visibility toggle
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 
 
-
-
-
+// SignUp component handles user registration
 export default function SignUp() {
 
     const { setToken } = useAuth();
     const navigate = useNavigate();
-    const [error, setError] = React.useState(null);
-    const [showPassword, setShowPassword] = React.useState(false);
-    const [formData, setFormData] = React.useState({
+
+    // Error state for API/validation messages
+    const [error, setError] = useState(null);
+
+    // Toggle password visibility
+    const [showPassword, setShowPassword] = useState(false);
+
+    // Form state
+    const [signupData, setFormData] = useState({
         email: '',
         username: '',
         password: '',
         confirmPassword: ''
     })
 
+    // Validation regex patterns
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const usernameRegex = /^(?=.*[a-zA-Z0-9])[a-zA-Z0-9_]{6,20}$/;
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
 
-    const isEmailValid = formData.email === '' || emailRegex.test(formData.email);
-    const isUsernameValid = formData.username === '' || usernameRegex.test(formData.username)
-    const isPasswordValid = formData.password === '' || passwordRegex.test(formData.password);
-    const isPasswordMatch = formData.confirmPassword === '' || formData.password === formData.confirmPassword;
-    const isFormValid = formData.email && formData.username && formData.password && isPasswordMatch;
+    // Validation checks (real-time feedback)
+    const isEmailValid = signupData.email === '' || emailRegex.test(signupData.email);
+    const isUsernameValid = signupData.username === '' || usernameRegex.test(signupData.username)
+    const isPasswordValid = signupData.password === '' || passwordRegex.test(signupData.password);
+    const isPasswordMatch = signupData.confirmPassword === '' || signupData.password === signupData.confirmPassword;
+
+    // Form validity (controls submit button)
+    const isFormValid = signupData.email && signupData.username && signupData.password && isPasswordMatch;
 
 
+    /**
+     * Handles input changes dynamically
+     */
     const handleChange = (e) => {
         const { name, value } = e.target;
+
         setFormData(prev => (
             { ...prev, [name]: value }
         ))
     }
 
-
+    /**
+     * Handles form submission (signup API call)
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        //last defence for the backend
+        // Final validation before API call (defensive check)
         if (!isEmailValid || !isUsernameValid || !isPasswordValid || !isPasswordMatch) {
             setError('Please fix the errors');
             return;
@@ -59,22 +76,25 @@ export default function SignUp() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(signupData)
             })
 
             const data = await res.json()
 
+            // Handle API errors
             if (!res.ok) {
                 throw new Error(data.message);
             }
+            // Save token and redirect
             setToken(data.token);
             navigate('/');
+            // Reset form after successful signup
             setFormData({ email: '', username: '', password: '', confirmPassword: '' })
             setError(null)
 
         }
-        catch (e) {
-            setError(e.message)
+        catch (error) {
+            setError(error.message)
         }
 
     }
@@ -96,10 +116,13 @@ export default function SignUp() {
                 autoComplete="off"
             >
                 <h1>Create your account</h1>
+
+                {/* Error alert */}
                 {error &&
                     <Alert sx={{ backgroundColor: '#ff000030' }} severity="error">{error}</Alert>
                 }
 
+                {/* Email input */}
                 <TextField
                     error={!isEmailValid}
                     helperText={!isEmailValid && "Enter a valid email address"}
@@ -109,10 +132,11 @@ export default function SignUp() {
                     variant="outlined"
                     className='input'
                     onChange={handleChange}
-                    value={formData.email}
+                    value={signupData.email}
                     required
                 />
 
+                {/* Username input */}
                 <TextField
                     error={!isUsernameValid}
                     helperText={!isUsernameValid && "6–20 characters · letters, numbers, underscores · must include a letter or number"}
@@ -121,10 +145,11 @@ export default function SignUp() {
                     variant="outlined"
                     className='input'
                     onChange={handleChange}
-                    value={formData.username}
+                    value={signupData.username}
                     required
                 />
 
+                {/* Password input */}
                 <TextField
                     error={!isPasswordMatch || !isPasswordValid}
                     helperText={
@@ -137,19 +162,19 @@ export default function SignUp() {
                     variant="outlined"
                     className='input'
                     onChange={handleChange}
-                    value={formData.password}
+                    value={signupData.password}
                     slotProps={{
                         input: {
                             endAdornment: (
                                 <InputAdornment position='end'>
                                     <IconButton
-                                    onClick={() => setShowPassword(prev => !prev)}
-                                    edge='end'
-                                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                                        onClick={() => setShowPassword(prev => !prev)}
+                                        edge='end'
+                                        aria-label={showPassword ? 'Hide password' : 'Show password'}
                                     >
                                         {showPassword ?
-                                         <VisibilityOffIcon/> : 
-                                         <VisibilityIcon/>}
+                                            <VisibilityOffIcon /> :
+                                            <VisibilityIcon />}
                                     </IconButton>
                                 </InputAdornment>
                             )
@@ -158,6 +183,7 @@ export default function SignUp() {
                     required
                 />
 
+                {/* Confirm password input */}
                 <TextField
                     error={!isPasswordMatch}
                     helperText={!isPasswordMatch && "Passwords do not match"}
@@ -167,19 +193,19 @@ export default function SignUp() {
                     variant="outlined"
                     className='input'
                     onChange={handleChange}
-                    value={formData.confirmPassword}
+                    value={signupData.confirmPassword}
                     slotProps={{
                         input: {
                             endAdornment: (
                                 <InputAdornment position='end'>
                                     <IconButton
-                                    onClick={() => setShowPassword(prev => !prev)}
-                                    edge='end'
-                                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                                        onClick={() => setShowPassword(prev => !prev)}
+                                        edge='end'
+                                        aria-label={showPassword ? 'Hide password' : 'Show password'}
                                     >
                                         {showPassword ?
-                                         <VisibilityOffIcon/> : 
-                                         <VisibilityIcon/>}
+                                            <VisibilityOffIcon /> :
+                                            <VisibilityIcon />}
                                     </IconButton>
                                 </InputAdornment>
                             )
@@ -188,6 +214,7 @@ export default function SignUp() {
                     required
                 />
 
+                {/* Submit button */}
                 <button className='signup-button' disabled={!isFormValid}>Sign Up</button>
 
             </Box>
