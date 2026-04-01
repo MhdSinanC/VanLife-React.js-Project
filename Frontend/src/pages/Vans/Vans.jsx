@@ -29,12 +29,13 @@ export default function Vans() {
     */
     const handleFilterChange = (key, value) => {
         setSearchParams(prevParams => {
+            const newParams = new URLSearchParams(prevParams)
             if (value === null) {
-                prevParams.delete(key)
+                newParams.delete(key)
             } else {
-                prevParams.set(key, value)
+                newParams.set(key, value)
             }
-            return prevParams;
+            return newParams;
         })
     }
 
@@ -44,14 +45,18 @@ export default function Vans() {
 
             try {
                 const res = await fetch(`${import.meta.env.VITE_API_URL}/api/vans`);
-                const vans = await res.json()
+                const data = await res.json()
+
+                if(!res.ok) {
+                    throw new Error(data.message || 'Failed to fetch vans');
+                }
 
                 // Store fetched vans (fallback to empty array)
-                setVans(vans.data || []);
+                setVans(data.data || []);
 
-            } catch (e) {
+            } catch (error) {
                 // Handle API errors
-                setError(e.message || 'Something went Wrong');
+                setError(error.message || 'Something went Wrong');
 
             } finally {
                 // Stop loading state
