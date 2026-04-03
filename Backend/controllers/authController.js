@@ -174,7 +174,4 @@ export const signupUser = async (req, res, next) => {
         next(error);
     }
 
-
-
-
 }
