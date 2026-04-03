@@ -1,11 +1,18 @@
 import jwt from 'jsonwebtoken'
 
+/**
+ * Protect Middleware
+ * - Verifies JWT access token
+ * - Attaches decoded user to request
+ */
 export const protect = (req, res, next) => {
     const authHeader = req.headers.authorization;
 
     //1. check token exists
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
-        return res.status(401).json({ message: 'No token provided' })
+        const error = new Error('No token provided')
+        error.statusCode = 401
+        return next(error)
     }
 
     //2. Extract token
@@ -22,8 +29,9 @@ export const protect = (req, res, next) => {
         next();
 
     } catch(e) {
-        return res.status(401).json({message: 'token invalid or expired'})
+        const error = new Error('Token invalid or expired')
+        error.statusCode = 401
+        return next(error)
     }
-
 
 }
