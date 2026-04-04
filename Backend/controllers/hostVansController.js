@@ -1,4 +1,5 @@
 import Van from '../models/Van.js';
+import { checkVanOwnership } from '../utils/ownership.js';
 
 
 /**
@@ -68,18 +69,10 @@ export const updateVan = async (req, res, next) => {
     try {
         const { id } = req.params;
 
-        // 1. Check if van exists
-        const van = await Van.findById(id);
-        if (!van) {
-            return res.status(404).json({ message: 'Van not found' })
-        }
+        // 1. Check if van exists and ownership with id
+        await checkVanOwnership(id, req.user.id)
 
-        // 2. Ownership check
-        if (van.hostId.toString() !== req.user.id) {
-            return res.status(403).json({ message: 'Not Authorized' });
-        }
-
-        // 3. Update van
+        // 2. Update van
         const updatedVan = await Van.findByIdAndUpdate(
             id,
             req.body,
@@ -107,18 +100,10 @@ export const deleteHostVan = async (req, res, next) => {
     try {
         const { id } = req.params;
 
-        // 1. Check if van exists
-        const van = await Van.findById(id);
-        if (!van) {
-            return res.status(404).json({ message: "Van not found!" });
-        }
+        // 1. Check if van exists and ownership with id
+        await checkVanOwnership(id, req.user.id)
 
-        // 2. Ownership check
-        if (van.hostId.toString() !== req.user.id) {
-            return res.status(403).json({ message: 'Not authorized' });
-        }
-
-        // 3. Delete van
+        // 2. Delete van
         await Van.findByIdAndDelete(id);
 
         return res.status(200).json({ message: 'Van deleted' });
