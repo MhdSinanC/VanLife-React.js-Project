@@ -1,23 +1,23 @@
 import Van from "../models/Van.js";
 
-//GET all vans controller /api/vans
-export async function getAllVans(req, res) {
+/**
+ * @desc Get all vans
+ * @route GET /api/vans
+ */
+export const getAllVans = async (req, res) => {
 
     try {
         const vans = await Van.find();
+
         return res.status(200).json({
             success: true,
             count: vans.length,
             data: vans
         });
     }
-    catch (e) {
-        console.error("Error getting vans data:", e)
-
-        res.status(500).json({
-            success: false,
-            message: 'Server error while fetching vans'
-        })
+    catch (err) {
+        err.message = `Fetch vans failed: ${err.message}`;
+        next(err);
     }
 
 }
@@ -26,7 +26,10 @@ export async function getAllVans(req, res) {
 
 
 
-//GET single van by ID /api/vans/:id
+/**
+ * @desc Get single van by ID
+ * @route GET /api/vans/:id
+ */
 export async function getVanById(req, res) {
 
     try {
@@ -44,12 +47,8 @@ export async function getVanById(req, res) {
             data: van
         })
     }
-    catch (e) {
-        console.error("Error getting van data", e)
-
-        return res.status(500).json({
-            success: false,
-            message: 'Server error while fetching van'
-        })
+    catch (err) {
+        err.message = `Fetch van failed: ${err.message}`;
+        next(err);
     }
 }
