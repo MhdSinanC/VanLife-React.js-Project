@@ -20,6 +20,26 @@ export const getHostVans = async (req, res, next) => {
 
 
 /**
+ * @desc Get a single van by id for logged-in host
+ * @route GET /api/host/vans/:id
+ */
+export const getHostVanById = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        const van = await checkVanOwnership(id, req.user.id);
+
+        return res.status(200).json({ success: true, data: van })
+    }
+    catch (err) {
+        err.message = `Fetch host van failed: ${err.message}`;
+        next(err);
+    }
+}
+
+
+
+/**
  * @desc Create a new van
  * @route POST /api/host/vans
  */
@@ -64,7 +84,7 @@ export const postHostVan = async (req, res, next) => {
  * @desc Update a van (only owner)
  * @route PUT /api/host/vans/:id
  */
-export const updateVan = async (req, res, next) => {
+export const updateHostVan = async (req, res, next) => {
 
     try {
         const { id } = req.params;
