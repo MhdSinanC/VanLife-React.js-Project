@@ -3,11 +3,15 @@ import { getAllVans, getVanById } from '../controllers/vansController.js';
 
 const vanRouter = express.Router()
 
-//GET all vans from /api/vans
+/**
+ * Public Van Routes
+ * Base path: /api/vans
+ */
+
+// Get all vans
 vanRouter.get('/', getAllVans)
 
-//GET single van from /api/vans/:id
+// Get single van by ID
 vanRouter.get('/:id', getVanById)
-
 
 export default vanRouter;
