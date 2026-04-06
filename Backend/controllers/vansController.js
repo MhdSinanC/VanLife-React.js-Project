@@ -4,7 +4,7 @@ import Van from "../models/Van.js";
  * @desc Get all vans
  * @route GET /api/vans
  */
-export const getAllVans = async (req, res) => {
+export const getAllVans = async (req, res, next) => {
 
     try {
         const vans = await Van.find();
@@ -30,7 +30,7 @@ export const getAllVans = async (req, res) => {
  * @desc Get single van by ID
  * @route GET /api/vans/:id
  */
-export async function getVanById(req, res) {
+export async function getVanById(req, res, next) {
 
     try {
         const { id } = req.params;
