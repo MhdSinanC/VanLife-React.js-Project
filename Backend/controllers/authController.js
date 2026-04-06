@@ -5,7 +5,8 @@ import { generateRefreshToken, generateToken } from '../utils/generateTokens.js'
 const isProduction = process.env.NODE_ENV === 'production';
 
 /**
- * Helper: Set refresh token cookie
+ * @desc Refresh access token using refresh token
+ * @route GET /api/auth/refresh
  */
 const setRefreshTokenCookie = (res, token) => {
     res.cookie("jwt", token, {
