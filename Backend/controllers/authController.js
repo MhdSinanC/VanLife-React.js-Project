@@ -71,7 +71,7 @@ export const loginUser = async (req, res, next) => {
  * @desc Logout user
  * @route POST /api/auth/logout
  */
-export const logOutUser = async (req, res, next) => {
+export const logoutUser = async (req, res, next) => {
 
     try {
         const cookies = req.cookies;
