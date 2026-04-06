@@ -2,34 +2,51 @@ import User from "../models/User.js";
 import { generateToken } from "../utils/generateTokens.js";
 import jwt from 'jsonwebtoken'
 
-export default async function refreshTokenController(req, res) {
-    const cookies = req.cookies;
+/**
+ * @desc Refresh access token using refresh token
+ * @route GET /api/auth/refresh
+ */
+const refreshTokenController = async (req, res, next) => {
 
-    if (!cookies) {
-        return res.sendStatus(401);
-    }
+    try {
+        const cookies = req.cookies;
 
-    const refreshToken = cookies.jwt;
+        // 1. Check if refresh token exists
+        if (!cookies?.jwt) {
+            return res.status(401).json({ message: 'No refresh token provided' });
+        }
 
-    const user = await User.findOne({ refreshToken: refreshToken })
+        const refreshToken = cookies.jwt;
 
-    if (!user) {
-        return res.sendStatus(403);
-    }
+        // 2. Find user with this refresh token
+        const user = await User.findOne({ refreshToken: refreshToken })
 
-    jwt.verify(
-        refreshToken,
-        process.env.REFRESH_TOKEN_SECRET,
-        (error, decoded) => {
-            if (error || user._id.toString() !== decoded.id) {
-                return res.sendStatus(403);
-            }
+        if (!user) {
+            return res.status(403).json({ message: 'Invalid refresh token' });
+        }
 
-            const accessToken = generateToken(user);
-            return res.json({
-                message: 'token refreshed',
-                token: accessToken
+        // 3. Verify refresh token
+        const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
+
+        // 4. Extra security check
+        if (user._id.toString() !== decoded.id) {
+            return res.status(403).json({
+                message: "Token mismatch"
             })
         }
-    )
+
+        // 5. Generate new access token
+        const accessToken = generateToken(user);
+
+        return res.status(200).json({
+            message: 'Token refreshed',
+            token: accessToken
+        })
+    }
+    catch (err) {
+        err.message = `Refresh token failed: ${err.message}`;
+        next(err)
+    }
 }
+
+export default refreshTokenController;
