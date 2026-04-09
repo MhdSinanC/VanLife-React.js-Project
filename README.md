@@ -187,7 +187,7 @@ Backend/
 ![Host Income](./screenshots/Host-income.png)
 ![Host Vans](./screenshots/Host-vans.png)
 ![Host review](./screenshots/Host-review.png)
-![About](./screenshots/About.png)
+![About](screenshots/About.png)
 ```
 
 ---
