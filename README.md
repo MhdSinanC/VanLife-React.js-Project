@@ -187,7 +187,7 @@ Backend/
 ![Host Income](./screenshots/Host-income.png)
 ![Host Vans](./screenshots/Host-vans.png)
 ![Host review](./screenshots/Host-review.png)
-![About](./screenshots/About.png)
+![About](https://github.com/MhdSinanC/VanLife-React.js-Project/blob/main/screenshots/About.png)
 ```
 
 ---
