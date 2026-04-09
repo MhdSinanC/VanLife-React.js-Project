@@ -176,8 +176,6 @@ Backend/
 
 ## 📸 Screenshots
 
-> Add screenshots here (recommended)
-
 
 ### Home
 ![Home](./screenshots/Home.png)
