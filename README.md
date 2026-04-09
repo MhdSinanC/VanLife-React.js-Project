@@ -178,17 +178,16 @@ Backend/
 
 > Add screenshots here (recommended)
 
-```md
+
+### Home
 ![Home](./screenshots/Home.png)
+
+### Vans Listing
 ![Vans](./screenshots/Vans.png)
-![Login](./screenshots/Login.png)
-![Signup](./screenshots/Signup.png)
-![Host Dashboard](./screenshots/Host.png)
-![Host Income](./screenshots/Host-income.png)
-![Host Vans](./screenshots/Host-vans.png)
-![Host review](./screenshots/Host-review.png)
-![About](screenshots/About.png)
-```
+
+### Host Dashboard
+![Dashboard](./screenshots/Host.png)
+
 
 ---
 
@@ -219,7 +218,7 @@ This project was built to practice full-stack development by implementing a real
 
 ## 👨‍💻 Author
 
-* GitHub: [https://https://github.com/MhdSinanC/VanLife-React.js-Project](https://ghttps://github.com/MhdSinanC/VanLife-React.js-Project)
+* GitHub: [https://https://github.com/MhdSinanC/](https://ghttps://github.com/MhdSinanC/)
 
 ---
 
