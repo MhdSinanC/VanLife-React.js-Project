@@ -2,7 +2,6 @@ nav.host-nav {
     padding: 1rem;
     display: flex;
     gap: 1.5rem;
-
     overflow-x: auto;
     white-space: nowrap;
 }
@@ -16,13 +15,12 @@ nav.host-nav > a {
 
 nav.host-nav > a:hover {
     color: #161616;
-    font-weight: 700;
     text-decoration: underline;
 }
 
 
 
-.active-link {
+nav.host-nav > a.active-link {
     font-weight: bold;
     text-decoration: underline;
     color: #161616;
