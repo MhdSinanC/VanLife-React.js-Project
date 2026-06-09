@@ -16,9 +16,9 @@ export default function Layout() {
 
     return (
         <>
-            <div className="site-wrapper">
+            <div  className='site-wrapper'>
                 {/* Global header (navigation, auth controls, etc.) */}
-                <Header />
+                <Header/>
 
                 {/* Main content area where routed components are rendered */}
                 <main className="site-main">

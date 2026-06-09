@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
-import './VanDetails.css';
 
 // Component to display details of a single van
 export default function VanDetails() {
@@ -13,6 +12,13 @@ export default function VanDetails() {
     // Access route params and location state
     const { id } = useParams();
     const location = useLocation();
+
+    //tailwind style variable
+    const typeStyles = {
+        simple: 'bg-[#E17654]',
+        rugged: 'bg-[#115E59]',
+        luxury: 'bg-[#161616]'
+    }
 
     // Fetch van details on component mount / id change
     useEffect(() => {
@@ -46,7 +52,7 @@ export default function VanDetails() {
     //Loading state
     if (loading) {
         return (
-            <div className="van-detail-wrapper">
+            <div className="van-detail-wrapper min-[700px]:px-16 min-[700px]:max-w-300 min-[700px]:my-0 min-[700px]:mx-auto px-4">
                 <h2 style={{ textAlign: 'center' }}>Fetching van details...</h2>
             </div>
         )
@@ -55,40 +61,40 @@ export default function VanDetails() {
     // Error state
     if (error) {
         return (
-            <div className="van-detail-wrapper">
+            <div className="van-detail-wrapper min-[700px]:px-16 min-[700px]:max-w-300 min-[700px]:my-0 min-[700px]:mx-auto px-4">
                 <h3 style={{textAlign: 'center'}}>{error}</h3>
             </div>
         )
     }
 
     return (
-        <div className="van-detail-wrapper">
+        <div className="van-detail-wrapper min-[700px]:px-16 min-[700px]:max-w-300 min-[700px]:my-0 min-[700px]:mx-auto px-4">
             {/* Back navigation (preserves previous filters/search params) */}
-            <Link to={`..?${location.state?.search}`} relative='path' className='back-button'>
+            <Link to={`..?${location.state?.search}`} relative='path' className='back-buton my-4 inline-block'>
                 &larr;<span>Back to {location.state?.type ?? 'all'} vans</span>
             </Link>
 
-            <div className="van-detail-container">
+            <div className="van-detail-container p-4 min-[700px]:flex min-[700px]:justify-center">
 
                 {/* Van details (render only when data is available) */}
                 {van && (
-                    <div className='van-detail'>
-                        <img src={van.imageUrl} alt={van.name} />
+                    <div className='van-detail min-[700px]:flex min-[700px]:justify-center min-[700px]:items-center min-[700px]:max-w-7xl min-[700px]:mb-4'>
+                        <img src={van.imageUrl} alt={van.name} className='max-w-full rounded-[5px] min-[700px]:w-[50%] min-[700px]:max-w-127.5 min-[700px]:min-h-125 min-[700px]:object-cover'/>
 
-                        <div className="van-detail-info">
+                        <div className="van-detail-info min-[700px]:w-[50%] min-[700px]:py-4 min-[700px]:px-8 min-[700px]:flex min-[700px]:flex-col min-[700px]:gap-4">
                             {/* Van type badge */}
-                            <span className={`van-type ${van.type}`}>{van.type}</span>
+                            <span className={`van-type text-[#FFEAD0] py-1 px-3.25 capitalize font-semibold leading-7.75 rounded-[5px] mt-8 inline-block min-[700px]:max-w-max ${typeStyles[van.type]}`}>{van.type}</span>
 
-                            <h2>{van.name}</h2>
+                            <h2 className='text-[32px] mt-6.5 font-black'>{van.name}</h2>
 
                             {/* Pricing */}
-                            <p className='van-price'><span>${van.price}</span>/day</p>
+                            <p className='van-price text-[20px] my-5'><span className='font-bold text-2xl'>${van.price}</span>/day</p>
 
                             {/* Description */}
-                            <p className='van-description'>{van.description}</p>
+                            <p className='van-description leading-5.75 mb-[1.2rem] mt-4'>{van.description}</p>
 
                             {/* Action button */}
-                            <button className='link-button'>Rent this van</button>
+                            <button className='link-button text-white bg-[#FF8C38] mb-4 min-w-full text-[18px] py-2 px-4 rounded-md font-bold'>Rent this van</button>
                         </div>
 
                     </div>

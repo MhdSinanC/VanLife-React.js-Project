@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './SignUp.css'
 // Material UI components for layout and inputs
 import { Box, IconButton, InputAdornment, TextField } from '@mui/material';
 import Alert from '@mui/material/Alert';
@@ -106,16 +105,16 @@ export default function SignUp() {
 
 
     return (
-        <div className="signup-container">
+        <div className="signup-container flex flex-col items-center justify-center">
 
             <Box
                 component="form"
                 onSubmit={handleSubmit}
-                className='signup-form'
+                className='signup-form gap-4'
                 sx={{ m: 2, p: 2, width: '100%', maxWidth: '40ch', display: 'flex', flexDirection: 'column' }}
                 autoComplete="off"
             >
-                <h1>Create your account</h1>
+                <h1 className='text-center text-[1.8rem] font-black'>Create your account</h1>
 
                 {/* Error alert */}
                 {error &&
@@ -134,6 +133,27 @@ export default function SignUp() {
                     onChange={handleChange}
                     value={signupData.email}
                     required
+                    sx={{
+                        "& .MuiOutlinedInput-root fieldset": {
+                            borderColor: "#ccc",
+                        },
+
+                        "& .MuiOutlinedInput-root:hover fieldset": {
+                            borderColor: "#000000",
+                        },
+
+                        "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                            borderColor: "#FF8C38",
+                        },
+
+                        "& .MuiInputLabel-root": {
+                            color: "#6e411c",
+                        },
+
+                        "& .MuiInputLabel-root.Mui-focused": {
+                            color: "#000000",
+                        },
+                    }}
                 />
 
                 {/* Username input */}
@@ -147,6 +167,27 @@ export default function SignUp() {
                     onChange={handleChange}
                     value={signupData.username}
                     required
+                    sx={{
+                        "& .MuiOutlinedInput-root fieldset": {
+                            borderColor: "#ccc",
+                        },
+
+                        "& .MuiOutlinedInput-root:hover fieldset": {
+                            borderColor: "#000000",
+                        },
+
+                        "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                            borderColor: "#FF8C38",
+                        },
+
+                        "& .MuiInputLabel-root": {
+                            color: "#6e411c",
+                        },
+
+                        "& .MuiInputLabel-root.Mui-focused": {
+                            color: "#000000",
+                        },
+                    }}
                 />
 
                 {/* Password input */}
@@ -181,6 +222,27 @@ export default function SignUp() {
                         }
                     }}
                     required
+                    sx={{
+                        "& .MuiOutlinedInput-root fieldset": {
+                            borderColor: "#ccc",
+                        },
+
+                        "& .MuiOutlinedInput-root:hover fieldset": {
+                            borderColor: "#000000",
+                        },
+
+                        "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                            borderColor: "#FF8C38",
+                        },
+
+                        "& .MuiInputLabel-root": {
+                            color: "#6e411c",
+                        },
+
+                        "& .MuiInputLabel-root.Mui-focused": {
+                            color: "#000000",
+                        },
+                    }}
                 />
 
                 {/* Confirm password input */}
@@ -212,10 +274,31 @@ export default function SignUp() {
                         }
                     }}
                     required
+                    sx={{
+                        "& .MuiOutlinedInput-root fieldset": {
+                            borderColor: "#ccc",
+                        },
+
+                        "& .MuiOutlinedInput-root:hover fieldset": {
+                            borderColor: "#000000",
+                        },
+
+                        "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                            borderColor: "#FF8C38",
+                        },
+
+                        "& .MuiInputLabel-root": {
+                            color: "#6e411c",
+                        },
+
+                        "& .MuiInputLabel-root.Mui-focused": {
+                            color: "#000000",
+                        },
+                    }}
                 />
 
                 {/* Submit button */}
-                <button className='signup-button' disabled={!isFormValid}>Sign Up</button>
+                <button className='signup-button text-white bg-[#FF8C38] max-w-180 w-full font-bold rounded-md py-3.25 px-4.25 text-[18px] cursor-pointer hover:bg-[#CB6F2D]' disabled={!isFormValid}>Sign Up</button>
 
             </Box>
 

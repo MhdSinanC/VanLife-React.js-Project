@@ -1,5 +1,4 @@
 import { useOutletContext } from "react-router-dom"
-import './HostVanPhotos.css'
 
 /**
  * HostVanPhotos
@@ -16,7 +15,7 @@ export default function HostVanPhotos() {
 
     return (
             <img
-                className="host-van-nested-photos"
+                className="my-[1.6rem] max-w-[6.56rem] rounded-[0.32rem]"
                 src={currentVan.imageUrl}
                 alt={currentVan.name}
             />

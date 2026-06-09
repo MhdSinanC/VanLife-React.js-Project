@@ -1,5 +1,4 @@
 import { useOutletContext } from "react-router-dom"
-import './HostVanPricing.css'
 
 /**
  * HostVanPricing
@@ -17,8 +16,8 @@ export default function HostVanPricing() {
 
     return (
         <h3
-            className="host-van-nested-price">
-            ${currentVan.price.toFixed(2)}<span>/day</span>
+            className="font-medium text-[24px] text-[#161616] mt-8">
+            ${currentVan.price.toFixed(2)}<span className="text-[16px] text-[#4D4D4D]">/day</span>
         </h3>
     )
 }

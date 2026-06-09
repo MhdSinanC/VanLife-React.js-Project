@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import './VanForm.css';
 import { Alert, InputAdornment, MenuItem, TextField } from "@mui/material";
 
 
@@ -75,109 +74,109 @@ export default function VanForm({ initialData, handleSubmit, error, submitLabel 
 
     }
 
-const onSubmit = async (e) => {
-    e.preventDefault();
+    const onSubmit = async (e) => {
+        e.preventDefault();
 
-    //defending for backend
-    if (!isNameValid || !isPriceValid || !isImageUrlValid || !isDescriptionValid) {
-        return;
+        //defending for backend
+        if (!isNameValid || !isPriceValid || !isImageUrlValid || !isDescriptionValid) {
+            return;
+        }
+
+        handleSubmit(formData);
+
+
     }
 
-    handleSubmit(formData);
 
-
-}
-
-
-return (
-    <>
-        {error && <Alert variant="filled" severity="error">
-            {error}
-        </Alert>}
-        <h3 style={{ textAlign: 'center' }}>{submitLabel}</h3>
-        <form className='new-van-form' onSubmit={onSubmit}>
-            <TextField
-                id="filled-basic"
-                error={!isNameValid}
-                helperText={!isNameValid && 'name must be 6 char long'}
-                name='name'
-                value={formData.name}
-                label="Van Name"
-                variant="filled"
-                onChange={onChange}
-                sx={{ maxWidth: '26.9rem', width: '100%' }}
-            />
-
-            <TextField
-                id="filled-basic"
-                name='imageUrl'
-                error={!isImageUrlValid}
-                helperText={!isImageUrlValid && 'Should be an image URL'}
-                value={formData.imageUrl}
-                label="Image URL"
-                variant="filled"
-                onChange={onChange}
-                sx={{ maxWidth: '26.9rem', width: '100%' }}
-            />
-
-            <div className='van-type-and-price-container'>
-
+    return (
+        <>
+            {error && <Alert variant="filled" severity="error">
+                {error}
+            </Alert>}
+            <h3 style={{ textAlign: 'center' }}>{submitLabel}</h3>
+            <form className='flex flex-col justify-center items-center px-4 gap-8 my-4' onSubmit={onSubmit}>
                 <TextField
-                    id="outlined-select-currency"
-                    name='type'
-                    value={formData.type}
-                    select
-                    sx={{ width: '13rem' }}
-                    label="Van Type"
-                    helperText="Please select your van type"
+                    id="filled-basic"
+                    error={!isNameValid}
+                    helperText={!isNameValid && 'name must be 6 char long'}
+                    name='name'
+                    value={formData.name}
+                    label="Van Name"
+                    variant="filled"
                     onChange={onChange}
-                >
-                    {types.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                        </MenuItem>
-                    ))}
-                </TextField>
+                    sx={{ maxWidth: '26.9rem', width: '100%' }}
+                />
 
                 <TextField
                     id="filled-basic"
-                    name='price'
-                    type='number'
-                    error={!isPriceValid}
-                    helperText={!isPriceValid && 'must be more than $1'}
-                    value={formData.price}
-                    label="Price"
+                    name='imageUrl'
+                    error={!isImageUrlValid}
+                    helperText={!isImageUrlValid && 'Should be an image URL'}
+                    value={formData.imageUrl}
+                    label="Image URL"
                     variant="filled"
-                    sx={{ maxWidth: '13rem', width: '100%' }}
                     onChange={onChange}
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                $
-                            </InputAdornment>
-                        ),
-                    }}
+                    sx={{ maxWidth: '26.9rem', width: '100%' }}
                 />
-            </div>
 
-            <TextField
-                id="outlined-multiline-static"
-                name='description'
-                error={!isDescriptionValid}
-                helperText={!isDescriptionValid && 'Description should be 50-200 characters'}
-                value={formData.description}
-                label="Description"
-                multiline
-                rows={4}
-                sx={{ maxWidth: '26.9rem', width: '100%' }}
-                onChange={onChange}
-                placeholder='Tell about your van..'
+                <div className='flex gap-4'>
 
-            />
+                    <TextField
+                        id="outlined-select-currency"
+                        name='type'
+                        value={formData.type}
+                        select
+                        sx={{ width: '13rem' }}
+                        label="Van Type"
+                        helperText="Please select your van type"
+                        onChange={onChange}
+                    >
+                        {types.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </TextField>
 
-            <button disabled={!isFormValid} className={`add-new-van-button ${!isFormValid ? 'disabled' : ''}`}>Submit</button>
-        </form>
-    </>
+                    <TextField
+                        id="filled-basic"
+                        name='price'
+                        type='number'
+                        error={!isPriceValid}
+                        helperText={!isPriceValid && 'must be more than $1'}
+                        value={formData.price}
+                        label="Price"
+                        variant="filled"
+                        sx={{ maxWidth: '13rem', width: '100%' }}
+                        onChange={onChange}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    $
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                </div>
 
-)
+                <TextField
+                    id="outlined-multiline-static"
+                    name='description'
+                    error={!isDescriptionValid}
+                    helperText={!isDescriptionValid && 'Description should be 50-200 characters'}
+                    value={formData.description}
+                    label="Description"
+                    multiline
+                    rows={4}
+                    sx={{ maxWidth: '26.9rem', width: '100%' }}
+                    onChange={onChange}
+                    placeholder='Tell about your van..'
+
+                />
+
+                <button disabled={!isFormValid} className={`bg-[#FF8C38] text-white font-bold rounded-md py-3.25 px-4.25 text-[18px] max-w-[26.9rem] w-full ${!isFormValid ? 'cursor-not-allowed' : 'cursor-pointer'}`}>Submit</button>
+            </form>
+        </>
+
+    )
 }

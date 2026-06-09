@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, Outlet, NavLink, useNavigate } from "react-router-dom";
-import './HostVanDetail.css';
 import { apiFetch } from "../../../utils/apiFetch";
 import { useAuth } from "../../../Context/AuthContext";
 
@@ -90,10 +89,16 @@ export default function HostVanDetail() {
         }
     }
 
+    const typeStyles = {
+        simple: 'bg-[#E17654]',
+        rugged: 'bg-[#115E59]',
+        luxury: 'bg-[#161616]'
+    }
+
 
     return (
         <>
-            <section className="host-van-details-container">
+            <section className="p-8 max-w-max">
                 {/* Loading state */}
                 {loading && <h2>Loading...</h2>}
 
@@ -104,46 +109,48 @@ export default function HostVanDetail() {
                 {currentVan && (
                     <>
                         {/* Back navigation */}
-                        <Link to={'..'} relative="path" className="back-button">
-                            &larr;<span>Back to all vans</span>
+                        <Link to={'..'} relative="path" className="mb-8 inline-block text-[#858585]">
+                            &larr;<span className="ml-2 text-[#201F1D] hover:underline">Back to all vans</span>
                         </Link>
 
-                        <div className="host-van-details-wrapper">
+                        <div className="bg-white p-[1.56rem] rounded-md max-w-125 w-full">
                             {/* Van basic info */}
-                            <div className="host-van-detail">
-                                <img src={currentVan.imageUrl} alt={currentVan.name} />
-                                <div className="host-van-detail-info">
-                                    <span className={currentVan.type}>{currentVan.type}</span>
-                                    <h2>{currentVan.name}</h2>
-                                    <p>${currentVan.price}<span>/day</span></p>
+                            <div className="flex max-[375px]:flex-col max-[375px]:gap-4">
+                                <img src={currentVan.imageUrl} alt={currentVan.name}
+                                    className="max-w-40 max-h-40 w-full h-full object-cover"
+                                />
+                                <div className="flex flex-col justify-evenly pl-4 max-[375px]:pl-0 max-[375px]:mt-4">
+                                    <span className={`text-[#FFEAD0] max-w-fit py-2 px-[1.1rem] rounded-[0.4rem] capitalize ${typeStyles[currentVan.type]}`}>{currentVan.type}</span>
+                                    <h2 className="mb-0 text-[24px]">{currentVan.name}</h2>
+                                    <p className="font-bold text-[19px] mt-[0.6rem]">${currentVan.price}<span className="font-medium text-[16px]">/day</span></p>
                                 </div>
                             </div>
 
                             {/* Action buttons */}
-                            <div className="delete-edit-button-container">
-                                <button onClick={deleteVan} className="delete-button">
+                            <div>
+                                <button onClick={deleteVan} className="mt-2 text-[rgba(255,0,0,0.678)]">
                                     <DeleteIcon />
                                 </button>
-                                <Link className="edit-button" to={`/host/vans/${id}/edit`}>
+                                <Link className="text-[rgb(46,56,174)]" to={`/host/vans/${id}/edit`}>
                                     <EditIcon />
                                 </Link>
                             </div>
 
                             {/* Sub-navigation for nested routes */}
-                            <nav className="host-van-detail-nav">
+                            <nav className="mt-8 flex gap-4 max-[375px]:mt-0">
                                 <NavLink to={'.'}
                                     end
-                                    className={({ isActive }) => isActive ? 'active' : ''}>
+                                    className={({ isActive }) => `text-[#4D4D4D] text-[16px] hover:underline hover:text-[#161616] hover:font-bold ${isActive ? 'underline text-[#161616] font-bold' : ''}`}>
                                     Details
                                 </NavLink>
 
                                 <NavLink to={'pricing'}
-                                    className={({ isActive }) => isActive ? 'active' : ''}>
+                                    className={({ isActive }) => `text-[#4D4D4D] text-[16px] hover:underline hover:text-[#161616] hover:font-bold ${isActive ? 'underline text-[#161616] font-bold' : ''}`}>
                                     Pricing
                                 </NavLink>
 
                                 <NavLink to={'photos'}
-                                    className={({ isActive }) => isActive ? 'active' : ''}>
+                                    className={({ isActive }) => `text-[#4D4D4D] text-[16px] hover:underline hover:text-[#161616] hover:font-bold ${isActive ? 'underline text-[#161616] font-bold' : ''}`}>
                                     Photos
                                 </NavLink>
                             </nav>

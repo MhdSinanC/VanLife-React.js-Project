@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import './HostVans.css';
 import { Link } from 'react-router-dom';
 import { apiFetch } from '../../../utils/apiFetch';
 import { useAuth } from '../../../Context/AuthContext';
@@ -60,11 +59,11 @@ export default function HostVans() {
     const hostVansElements = vans.map(van => (
         <Link key={van._id} to={`/host/vans/${van._id}`} className='host-van-link-wrapper'>
 
-            <div className="host-van-card">
-                <img src={van.imageUrl} alt={van.name} />
+            <div className="host-van-card flex gap-4 items-center bg-[#FFF] py-4 px-[1.7rem] rounded-xl shadow-lg border border-[rgba(0,0,0,0.03)] min-[750px]:flex-col min-[750px]:items-start min-[750px]:justify-center min-[750px]:w-full min-[750px]:max-w-[20rem] min-[750px]:h-full min-[750px]:max-h-102">
+                <img src={van.imageUrl} alt={van.name} className='max-w-20 max-h-20 rounded-[0.4rem] h-full w-full min-[750px]:min-w-full min-[750px]:max-h-65.75 min-[750px]:h-full min-[750px]:object-cover'/>
                 <div className="host-van-info">
-                    <h3>{van.name}</h3>
-                    <p>{`$${van.price}/day`}</p>
+                    <h3 className='mb-0 mt-4 font-black text-[1.25rem]'>{van.name}</h3>
+                    <p className='text-[#4D4D4D] my-[0.7rem]'>{`$${van.price}/day`}</p>
                 </div>
             </div>
 
@@ -73,17 +72,17 @@ export default function HostVans() {
 
 
     return (
-        <section>
+        <section className='p-4'>
             {/* Page header with add button */}
-            <div className='host-vans-title-container'>
-                <h1>Your listed vans</h1>
+            <div className='host-vans-title-container flex items-center justify-between'>
+                <h1 className='text-[32px] my-4.75 font-black'>Your listed vans</h1>
 
                 {/* Navigate to create new van */}
-                <Link to={'new'}><AddCircleOutlineIcon /></Link>
+                <Link className='text-[#8B6048] min-[750px]:before:content-["Add_new_van"] min-[750px]:before:mr-2 min-[750px]:flex min-[750px]:items-center min-[750px]:p-[0.6rem] min-[750px]:bg-[#F8E4CB] min-[750px]:rounded-lg min-[750px]:no-underline min-[750px]:shadow-[-1px_-1px_32px_-2px_rgba(110,111,70,0.1)] min-[750px]:border border-black' to={'new'}><AddCircleOutlineIcon /></Link>
             </div>
 
             {/* Vans list */}
-            <div className="host-vans-list-container">
+            <div className="host-vans-list-container px-4 flex flex-col gap-[1.2rem] mb-8 min-[750px]:grid min-[750px]:grid-cols-[repeat(auto-fit,minmax(230px,325px))]">
 
                 {/* Loading state */}
                 {loading && <h2 className='van-loading'>Loading..</h2>}

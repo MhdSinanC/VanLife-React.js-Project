@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './Login.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 // Auth context for managing authentication state
 import { useAuth } from '../../../Context/AuthContext';
@@ -98,7 +97,7 @@ export default function Login() {
 
 
     return (
-        <div className="login-container">
+        <div className="login-container mt-8 px-4 flex flex-col items-center">
 
             {/* Message from protected route redirect (e.g., "Please log in first") */}
             {location.state?.message &&
@@ -106,7 +105,7 @@ export default function Login() {
                     {location.state.message}
                 </Alert>
             }
-            <h1>Log in to your account</h1>
+            <h1 className='text-[1.8rem] my-4.75 font-black'>Log in to your account</h1>
 
             {/* Error alert */}
             {error &&
@@ -115,7 +114,7 @@ export default function Login() {
                 </Alert>
             }
 
-            <form className="login-form" onSubmit={handleSubmit}>
+            <form className="login-form flex flex-col w-full max-w-125 gap-8" onSubmit={handleSubmit}>
 
                 {/* Email input */}
                 <TextField
@@ -158,12 +157,12 @@ export default function Login() {
                 />
 
                 {/* Submit button */}
-                <button disabled={isDisabled} className={isDisabled ? 'disabled' : ''}>
+                <button disabled={isDisabled} className={` font-bold rounded-md py-3.25 px-4.25 text-[18px]   ${isDisabled ? 'bg-[#BDA99A] text-[#654747] cursor-not-allowed' : 'bg-[#FF8C38] text-white cursor-pointer hover:bg-[#CB6F2D]'}`}>
                     {status === 'submitting' ? 'Logging in...' : 'Log In'}
                 </button>
 
                 {/* Navigation to signup */}
-                <Link className='signup-link' to={'/signup'}>Don&apos;t have an account ?</Link>
+                <Link className='signup-link text-black mt-2 max-w-fit underline' to={'/signup'}>Don&apos;t have an account ?</Link>
             </form>
         </div>  
     )

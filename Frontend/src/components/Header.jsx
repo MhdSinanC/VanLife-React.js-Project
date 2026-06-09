@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { Link, NavLink } from "react-router-dom";
-import './Header.css';
 import { CgProfile } from "react-icons/cg";
 import { IoMdLogOut } from "react-icons/io";
 import { useAuth } from "../../Context/AuthContext";
@@ -45,13 +44,13 @@ export default function Header() {
 
 
     return (
-        <header>
+        <header className="flex items-center py-[0.7rem] px-[1.1rem] relative">
             {/* Logo / Home link */}
-            <Link className='site-logo' to='/'>#Vanlife</Link>
+            <Link className='text-black font-black text-[1.5625rem] mr-auto uppercase hover:underline min-[497px]:text-[2.4rem]' to='/'>#Vanlife</Link>
 
             {/*Hamburger button for mobile view*/}
             <button
-                className="menu-btn"
+                className="max-[500px]:block hidden text-[26px] bg-transparent border-none cursor-pointer p-[0.3rem]"
                 onClick={() => setMenuOpen(prev => !prev)}
                 aria-label={'Toggle-menu'}
             >
@@ -60,26 +59,32 @@ export default function Header() {
 
             {/* Navigation menu */}
             <nav
-                className={menuOpen ? 'nav active' : 'nav'}
+                className={`flex gap-2.5 mr-[0.2rem] items-center max-[500px]:absolute max-[500px]:top-17.5 max-[500px]:right-0 max-[500px]:bg-[#FFF7ED] max-[500px]:flex-col max-[500px]:w-full max-[500px]:p-5 max-[500px]:shadow-[0 5px 15px rgba(0,0,0,0.1)]  max-[500px]:z-1000  ${menuOpen ? 'max-[500px]:flex' : 'max-[500px]:hidden'}`}
                 onClick={() => setMenuOpen(false)}      // Close menu on link click
             >
 
                 {/* Navigation links with active styling */}
                 <NavLink
                     to='/vans'
-                    className={({ isActive }) => isActive ? "activeLink" : ""}>
+                    className={({ isActive }) =>
+                        `decoration-0 text-[#4d4d4d] font-semibold p-1.25 hover:text-[#161616] hover:underline hover:decoration-2 min-[497px]:text-[1.1rem] ${isActive ? "font-bold text-[#161616] underline decoration-2" : ""}`
+                    }>
                     Vans
                 </NavLink>
 
                 <NavLink
                     to='/host'
-                    className={({ isActive }) => isActive ? "activeLink" : ""}>
+                    className={({ isActive }) =>
+                        `decoration-0 text-[#4d4d4d] font-semibold p-1.25 hover:text-[#161616] hover:underline hover:decoration-2 min-[497px]:text-[1.1rem] ${isActive ? "font-bold text-[#161616] underline decoration-2" : ""}`
+                    }>
                     Host
                 </NavLink>
 
                 <NavLink
                     to='/about'
-                    className={({ isActive }) => isActive ? "activeLink" : ""}>
+                    className={({ isActive }) =>
+                        `decoration-0 text-[#4d4d4d] font-semibold p-1.25 hover:text-[#161616] hover:underline hover:decoration-2 min-[497px]:text-[1.1rem] ${isActive ? "font-bold text-[#161616] underline decoration-2" : ""}`
+                    }>
                     About
                 </NavLink>
 
@@ -88,10 +93,10 @@ export default function Header() {
             {/* Auth section: show logout if logged in, else login icon */}
             {
                 token ?
-                    <button onClick={onLogOut}><IoMdLogOut className="logout-icon" /></button>
+                    <button onClick={onLogOut}><IoMdLogOut className="text-2xl" /></button>
                     : <NavLink
                         to='/login'>
-                        <CgProfile className="login-icon" />
+                        <CgProfile className="text-2xl" />
                     </NavLink>
             }
         </header>

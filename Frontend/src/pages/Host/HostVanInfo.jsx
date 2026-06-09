@@ -1,5 +1,4 @@
 import { useOutletContext } from "react-router-dom"
-import './HostVanInfo.css';
 
 /**
  * HostVanInfo
@@ -15,11 +14,11 @@ export default function HostVanInfo() {
     if (!currentVan) return <p>Loading...</p>
 
     return (
-        <div className="host-van-nested-info">
-            <h4>Name: <span>{currentVan.name}</span></h4>
-            <h4>Category: <span>{currentVan.type}</span></h4>
-            <h4>Description: <span>{currentVan.description}</span></h4>
-            <h4>Visibility: <span>Public</span></h4>
+        <div className="max-w-112.5 text-[15px] leading-5.25 flex flex-col gap-2">
+            <h4 className="mt-3 font-extrabold">Name: <span className="font-extralight">{currentVan.name}</span></h4>
+            <h4 className="font-extrabold">Category: <span className="font-extralight">{currentVan.type}</span></h4>
+            <h4 className="font-extrabold">Description: <span className="font-extralight">{currentVan.description}</span></h4>
+            <h4 className="font-extrabold">Visibility: <span className="font-extralight">Public</span></h4>
         </div>
     )
 }
