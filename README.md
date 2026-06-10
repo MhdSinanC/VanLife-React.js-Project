@@ -43,6 +43,7 @@ VanLife is a full-stack MERN-style application that simulates a van rental platf
 **Frontend**
 
 * React (Vite)
+* Tailwind CSS v4
 * HTML, CSS, JavaScript
 
 **Backend**
