@@ -65,7 +65,26 @@ app.use((err, req, res, next) => {
 })
 
 
+// ===== Health Check Route =====
+app.get('/api/health', (req, res) => {
+    res.status(200).json({ status: 'ok' })
+})
+
 // ===== Start Server =====
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
+
+    // ===== Self-Ping (Keep alive on Render free tier) =====
+    // Pings itself every 14 minutes to prevent spin-down
+    if (isProduction) {
+        const RENDER_URL = process.env.RENDER_URL;
+        setInterval(async () => {
+            try {
+                await fetch(`${RENDER_URL}/api/health`)
+                console.log('[Self-Ping] Server kept alive')
+            } catch (err) {
+                console.error('[Self-Ping] Failed:', err.message)
+            }
+        }, 14 * 60 * 1000) // 14 minutes
+    }
 })
