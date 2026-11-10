@@ -5,6 +5,7 @@ import Home from './pages/Home/Home';
 import About from './pages/About/About';
 import Vans from './pages/Vans/Vans';
 import VanDetails from './pages/Vans/VanDetails';
+import MyBookings from './pages/Bookings/MyBookings';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
 import NotFound from './pages/NotFound/NotFound';
@@ -53,6 +54,9 @@ export default function App() {
             {/* Protected routes (require authentication) */}
             <Route element={<AuthRequired />}>
 
+              {/* Van Bookings */}
+              <Route path='bookings' element={<MyBookings />} />
+
               {/* Host layout */}
               <Route path='host' element={<HostLayout />}>
 
@@ -83,7 +87,7 @@ export default function App() {
                 </Route>
               </Route>
             </Route>
-            
+
             {/* Fallback route */}
             <Route path="*" element={<NotFound />} />
           </Route>

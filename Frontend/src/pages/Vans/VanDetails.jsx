@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link, useLocation } from 'react-router-dom';
+import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../Context/AuthContext';
+import RentModal from './RentModal';
 
 // Component to display details of a single van
 export default function VanDetails() {
@@ -8,6 +10,20 @@ export default function VanDetails() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const [van, setVan] = useState(null);
+
+    const { token } = useAuth();
+
+    // Decode JWT payload to get current user's id
+    // JWT format: header.payload.signature
+    // atob() decodes base64 → the payload contains { id, email, iat, exp }
+    const currentUserId = token
+        ? JSON.parse(atob(token.split('.')[1])).id
+        : null;
+
+    const isOwnVan = van && currentUserId && van.hostId === currentUserId;
+
+    const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
 
     // Access route params and location state
     const { id } = useParams();
@@ -62,7 +78,7 @@ export default function VanDetails() {
     if (error) {
         return (
             <div className="van-detail-wrapper min-[700px]:px-16 min-[700px]:max-w-300 min-[700px]:my-0 min-[700px]:mx-auto px-4">
-                <h3 style={{textAlign: 'center'}}>{error}</h3>
+                <h3 style={{ textAlign: 'center' }}>{error}</h3>
             </div>
         )
     }
@@ -79,7 +95,7 @@ export default function VanDetails() {
                 {/* Van details (render only when data is available) */}
                 {van && (
                     <div className='van-detail min-[700px]:flex min-[700px]:justify-center min-[700px]:items-center min-[700px]:max-w-7xl min-[700px]:mb-4'>
-                        <img src={van.imageUrl} alt={van.name} className='max-w-full rounded-[5px] min-[700px]:w-[50%] min-[700px]:max-w-127.5 min-[700px]:min-h-125 min-[700px]:object-cover'/>
+                        <img src={van.imageUrl} alt={van.name} className='max-w-full rounded-[5px] min-[700px]:w-[50%] min-[700px]:max-w-127.5 min-[700px]:min-h-125 min-[700px]:object-cover' />
 
                         <div className="van-detail-info min-[700px]:w-[50%] min-[700px]:py-4 min-[700px]:px-8 min-[700px]:flex min-[700px]:flex-col min-[700px]:gap-4">
                             {/* Van type badge */}
@@ -94,7 +110,32 @@ export default function VanDetails() {
                             <p className='van-description leading-5.75 mb-[1.2rem] mt-4'>{van.description}</p>
 
                             {/* Action button */}
-                            <button className='link-button text-white bg-[#FF8C38] mb-4 min-w-full text-[18px] py-2 px-4 rounded-md font-bold'>Rent this van</button>
+                            {isOwnVan ? (
+                                <p className='text-gray-500 italic text-center py-2 border rounded-md'>
+                                    🚐 This is your van - you can't rent it
+                                </p>
+                            ) : (
+                                <>
+                                    <button
+                                        className='link-button text-white bg-[#FF8C38] mb-4 min-w-full text-[18px] py-2 px-4 rounded-md font-bold'
+                                        onClick={() => {
+                                            if (!token) {
+                                                navigate('/login', { state: { message: 'Please login to rent a van' } });
+                                            } else {
+                                                setShowModal(true);
+                                            }
+                                        }}
+                                    >
+                                        Rent this van
+                                    </button>
+
+                                    {/* Rent Modal — only mounts when showModal is true */}
+                                    {showModal && (
+                                        <RentModal van={van} onClose={() => setShowModal(false)} />
+                                    )}
+                                </>
+                            )}
+
                         </div>
 
                     </div>

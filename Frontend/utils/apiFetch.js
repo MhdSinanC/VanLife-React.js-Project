@@ -5,20 +5,31 @@
  * - Attaching access token (Authorization header)
  * - Automatic token refresh on 401 (unauthorized)
  * - Retrying the original request after refreshing token
+ * - Supports GET and POST (with JSON body)
  *
  * @param {string} url - API endpoint
  * @param {string|null} token - Current access token
  * @param {function} setToken - Function to update token in context
+ * @param {object} options    - Optional: {method, body}
  */
 
-export const apiFetch = async (url, token, setToken) => {
-    // Initial request with access token
-    let res = await fetch(url, {
+export const apiFetch = async (url, token, setToken, options = {}) => {
+
+    const { method = 'GET', body = null } = options;
+
+    //Build the fetch config object
+    const config = {
+        method: method,
         headers: {
-            Authorization: token ? `Bearer ${token}` : ''
+            Authorization: token ? `Bearer ${token}` : '',
+            ...(body ? { 'Content-Type': 'application/json' } : {})
         },
-        credentials: 'include'      // Send cookies (for refresh token)
-    })
+        credentials: 'include',
+        ...(body ? { body: JSON.stringify(body) } : {})
+    }
+
+    // Initial request
+    let res = await fetch(url, config);
 
     // If access token is expired/invalid → try refreshing it
     if (res.status === 401) {
@@ -35,11 +46,12 @@ export const apiFetch = async (url, token, setToken) => {
 
                 // Retry original request with new token
                 res = await fetch(url, {
+                    ...config,
                     headers: {
-                        Authorization: data.token ? `Bearer ${data.token}` : ''
-                    },
-                    credentials: 'include'
-                })
+                        ...config.headers,
+                        Authorization: `Bearer ${data.token}`
+                    }
+                });
             }
             else {
                 // Refresh token invalid → log user out
@@ -50,7 +62,6 @@ export const apiFetch = async (url, token, setToken) => {
             console.error("Token refresh failed", error);
             setToken(null);
         }
-
     }
 
     return res;

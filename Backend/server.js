@@ -11,9 +11,10 @@ import connectDB from './config/connectDB.js';
 import { protect } from './middleware/authMiddleware.js';
 
 // ===== Routes =====
-import vanRouter from './routes/vanRoutes.js'
+import vanRouter from './routes/vanRoutes.js';
 import hostVanRouter from './routes/hostVanRoutes.js';
-import authRouter from './routes/authRouter.js'
+import bookingRouter from './routes/bookingRoutes.js';
+import authRouter from './routes/authRouter.js';
 
 // ===== Environment Setup =====
 dotenv.config()
@@ -49,6 +50,7 @@ app.use('/api/vans', vanRouter)
 // Protected routes (require valid JWT)
 app.use('/api/host', protect, hostVanRouter)
 app.use('/api/auth', authRouter)
+app.use('/api/bookings', protect, bookingRouter)
 
 /**
  * Global Error Handler
