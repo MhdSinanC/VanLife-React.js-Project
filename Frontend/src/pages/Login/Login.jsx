@@ -66,7 +66,7 @@ export default function Login() {
             setToken(data.token)
 
             // Redirect user to previous page or default dashboard
-            navigate(location.state?.from || '/host', { replace: true });
+            navigate(location.state?.from || '/vans', { replace: true });
 
         }
         catch (error) {
@@ -164,6 +164,6 @@ export default function Login() {
                 {/* Navigation to signup */}
                 <Link className='signup-link text-black mt-2 max-w-fit underline' to={'/signup'}>Don&apos;t have an account ?</Link>
             </form>
-        </div>  
+        </div>
     )
 }

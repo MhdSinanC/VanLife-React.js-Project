@@ -120,7 +120,7 @@ export default function VanDetails() {
                                         className='link-button text-white bg-[#FF8C38] mb-4 min-w-full text-[18px] py-2 px-4 rounded-md font-bold'
                                         onClick={() => {
                                             if (!token) {
-                                                navigate('/login', { state: { message: 'Please login to rent a van' } });
+                                                navigate('/login', { state: { message: 'Please login to rent a van', from: `/vans/${id}` } });
                                             } else {
                                                 setShowModal(true);
                                             }
