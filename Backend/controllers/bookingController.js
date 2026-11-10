@@ -80,3 +80,48 @@ export const getMyBookings = async (req, res, next) => {
         next(err);
     }
 }
+
+
+
+
+/**
+ * @desc  Cancel a booking (renter only)
+ * @route PATCH /api/bookings/:id/cancel
+ */
+
+export const cancelBooking = async (req, res, next) => {
+    try {
+
+        const { id } = req.params;
+
+        //1. Find the booking
+        const booking = await Booking.findById(id);
+        if (!booking) {
+            return res.status(404).json({ message: 'Booking not found' });
+        }
+
+        //2. Ownership check: Make sure this booking belongs to the logged-in user
+        if (booking.renterId.toString() !== req.user.id) {
+            return res.status(403).json({ message: 'You are not authorized to cancel this booking' });
+        }
+
+        //3. Prevent re-cancelling
+        if (booking.status === 'cancelled') {
+            return res.status(400).json({ message: 'Booking is already cancelled' });
+        }
+
+        //4. Update status and save
+        booking.status = 'cancelled';
+        await booking.save();
+
+        return res.status(200).json({
+            success: true,
+            message: 'Booking cancelled successfully',
+            data: booking
+        });
+
+    }
+    catch (err) {
+        next(err);
+    }
+}

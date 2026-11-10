@@ -37,6 +37,36 @@ export default function MyBookings() {
     }, [])
 
 
+
+    const handleCancelBooking = async (bookingId) => {
+        //1. Confirm with the user first
+        const confirmed = window.confirm("Are you sure you want to cancel this booking");
+        if (!confirmed) return;
+
+        try {
+            const res = await apiFetch(
+                `${import.meta.env.VITE_API_URL}/api/bookings/${bookingId}/cancel`,
+                token,
+                setToken,
+                { method: 'PATCH' }
+            );
+
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.message || 'Failed to cancel booking');
+
+            //2. Update local state so UI updates immediately (no full page reload needed!)
+            setBookings(prev => (
+                prev.map(item => (
+                    item._id === bookingId ? { ...item, status: 'cancelled' } : item
+                ))
+            ))
+        }
+        catch (err) {
+            alert(err.message);
+        }
+    }
+
+
     if (loading) return <p className='text-center mt-10'>Loading bookings..</p>
     if (error) return <p className='text-center mt-10 text-red-500'>{error}</p>
 
@@ -83,10 +113,27 @@ export default function MyBookings() {
                                 </p>
                             </div>
 
-                            {/*Status badge*/}
-                            <span className='bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full capitalize'>
-                                {booking.status}
-                            </span>
+                            {/*Status & Cancel Action*/}
+                            <div className='flex flex-col items-end gap-2'>
+                                <span
+                                    className={`text-xs font-semibold px-2.5 py-1 rounded-full capitalize ${booking.status === 'confirmed'
+                                        ? 'bg-green-100 text-green-700'
+                                        : 'bg-red-100 text-red-600'
+                                        }`}
+                                >
+                                    {booking.status}
+                                </span>
+
+                                {/* Only show cancel button if booking is still confirmed */}
+                                {booking.status === 'confirmed' && (
+                                    <button
+                                        onClick={() => handleCancelBooking(booking._id)}
+                                        className='text-xs text-red-500 hover:text-red-700 font-semibold underline cursor-pointer'
+                                    >
+                                        Cancel Booking
+                                    </button>
+                                )}
+                            </div>
                         </div>
                     ))}
                 </div>
