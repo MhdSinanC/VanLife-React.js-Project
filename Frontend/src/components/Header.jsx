@@ -50,7 +50,7 @@ export default function Header() {
 
             {/*Hamburger button for mobile view*/}
             <button
-                className="max-[500px]:block hidden text-[26px] bg-transparent border-none cursor-pointer p-[0.3rem]"
+                className="max-[585px]:block hidden text-[26px] bg-transparent border-none cursor-pointer p-[0.3rem] mt-[2px] mr-[0.6rem]"
                 onClick={() => setMenuOpen(prev => !prev)}
                 aria-label={'Toggle-menu'}
             >
@@ -59,7 +59,7 @@ export default function Header() {
 
             {/* Navigation menu */}
             <nav
-                className={`flex gap-2.5 mr-[0.2rem] items-center max-[500px]:absolute max-[500px]:top-17.5 max-[500px]:right-0 max-[500px]:bg-[#FFF7ED] max-[500px]:flex-col max-[500px]:w-full max-[500px]:p-5 max-[500px]:shadow-[0 5px 15px rgba(0,0,0,0.1)]  max-[500px]:z-1000  ${menuOpen ? 'max-[500px]:flex' : 'max-[500px]:hidden'}`}
+                className={`flex gap-2.5 mr-[0.2rem] items-center max-[585px]:absolute max-[585px]:top-17.5 max-[585px]:right-0 max-[585px]:bg-[#FFF7ED] max-[585px]:flex-col max-[585px]:w-full max-[585px]:p-5 max-[585px]:shadow-[0 5px 15px rgba(0,0,0,0.1)]  max-[585px]:z-1000  ${menuOpen ? 'max-[585px]:flex' : 'max-[585px]:hidden'}`}
                 onClick={() => setMenuOpen(false)}      // Close menu on link click
             >
 
@@ -79,6 +79,16 @@ export default function Header() {
                     }>
                     Host
                 </NavLink>
+
+                {token && (
+                    <NavLink
+                        to='/bookings'
+                        className={({ isActive }) =>
+                            `decoration-0 text-[#4d4d4d] font-semibold p-1.25 hover:text-[#161616] hover:underline hover:decoration-2 min-[497px]:text-[1.1rem] ${isActive ? "font-bold text-[#161616] underline decoratioin-2" : ""}`
+                        }>
+                        My Bookings
+                    </NavLink>
+                )}
 
                 <NavLink
                     to='/about'
